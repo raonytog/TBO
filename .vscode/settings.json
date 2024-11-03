@@ -2,6 +2,7 @@
     "files.associations": {
         "primo.h": "c",
         "time.h": "c",
-        "utils.h": "c"
+        "utils.h": "c",
+        "list.h": "c"
     }
 }
