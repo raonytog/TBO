@@ -22,5 +22,7 @@ void mark_multiple(int *array, int N) {
             if (j % i == NOT_FOUND) 
                 array[j] = FOUND;
         }
+
+        while (array[i] == FOUND) { i++; }
     }
 }
