@@ -3,6 +3,7 @@
         "primo.h": "c",
         "time.h": "c",
         "utils.h": "c",
-        "list.h": "c"
+        "list.h": "c",
+        "stdlib.h": "c"
     }
 }
