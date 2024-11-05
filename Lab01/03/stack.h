@@ -7,6 +7,8 @@
 
 typedef struct Stack Stack;
 
+
+
 Stack *InitStack();
 
 void Push(Stack *sp, void *data);
@@ -15,7 +17,7 @@ void *Pop(Stack *sp);
 
 void DestroyStack(Stack *sp);
 
-bool IsEmpityStack(Stack *sp);
+bool IsEmptyStack(Stack *sp);
 
 bool IsFullStack(Stack *sp);
 

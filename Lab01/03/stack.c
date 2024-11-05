@@ -11,6 +11,7 @@ struct Stack {
 
 Stack *InitStack() {
     Stack *new = malloc(sizeof(Stack));
+    
     new->base = 0;
     new->top = -1;
     return new;
@@ -24,10 +25,10 @@ void Push(Stack *sp, void *data) {
 }
 
 void *Pop(Stack *sp) {
-    if (!sp  || IsEmpityStack(sp)) return;
+    if (!sp  || IsEmptyStack(sp)) return NULL;
 
-    void *ans = sp->top;
-    sp->top = NULL;
+    void *ans = sp->data[sp->top];
+    sp->data[sp->top] = NULL;
     sp->top--;
     return ans;
 }
@@ -37,7 +38,7 @@ void DestroyStack(Stack *sp) {
     free(sp);
 }
 
-bool IsEmpityStack(Stack *sp) {
+bool IsEmptyStack(Stack *sp) {
     if (!sp) return false;
     return sp->top == -1;
 }
