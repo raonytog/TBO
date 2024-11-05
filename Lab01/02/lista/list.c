@@ -17,7 +17,6 @@ static void DestroyCell(Cell *c) {
     else free(c);
 }
 
-
 List *CreateList() {
     List *new = malloc(sizeof(List));
     new->first = new->last = NULL;
@@ -57,7 +56,7 @@ void *RemoveList(List *lista, int cycle) {
             last = aux;
             aux = aux->next;
         }
-        printf("Saiu o %d\n", aux->idx);
+        // printf("Saiu o %d\n", aux->idx);
         last->next = aux->next;
 
         if (aux == lista->first) { lista->first = lista->first->next; } 
