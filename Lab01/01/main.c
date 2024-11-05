@@ -36,7 +36,7 @@ void print_array(int *array, int N) {
 }
 
 void mark_multiple(int *array, int N) {
-
+    
 
 
 
