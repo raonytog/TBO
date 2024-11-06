@@ -15,6 +15,12 @@ void Push(Stack *sp, void *data);
 
 void *Pop(Stack *sp);
 
+
+/// @brief print stack
+/// @param sp stack pointer
+/// @param wichStack 0 if numbers, 1 if operations
+void PrintStack(Stack *sp, int wichStack);
+
 void DestroyStack(Stack *sp);
 
 bool IsEmptyStack(Stack *sp);
