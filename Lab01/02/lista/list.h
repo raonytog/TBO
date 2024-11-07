@@ -7,11 +7,9 @@ List *CreateList();
 
 void AppendList(List *lista, int idx);
 
-void *RemoveList(List *lista, int cycle);
+void RemoveList(List *lista, int cycle);
 
 void PrintList(List *lista);
-
-int getListLenght(List *lista);
 
 List *DefineCiclyc(List *lista);
 

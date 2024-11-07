@@ -5,9 +5,8 @@ void fillVector(int *array, int size);
 void printArray(int *array, int size);
 void findLeader(int *array, int size, int cycle);
 
-int main (int argc, char const *argv[]) {
-    // int N = atoi(argv[1]), cycle = atoi(argv[2]);
-    int N = 100, cycle = 5;
+int main () { //0m0,137s
+    int N = 100000, cycle = 10;
     int vetor[N];fillArray(vetor, N);
     findLeader(vetor, N, cycle);
 

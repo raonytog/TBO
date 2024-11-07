@@ -10,6 +10,7 @@ typedef struct Cell {
 
 struct List {
     Cell *first, *last;
+    int lenght;
 };
 
 static void DestroyCell(Cell *c) {
@@ -20,6 +21,7 @@ static void DestroyCell(Cell *c) {
 List *CreateList() {
     List *new = malloc(sizeof(List));
     new->first = new->last = NULL;
+    new->lenght = 0;
 
     return new;
 }
@@ -38,26 +40,29 @@ void AppendList(List *lista, int idx) {
         lista->last->next = new;
         lista->last = new;
     }
+
+    lista->lenght++;
 }
 
-void *RemoveList(List *lista, int cycle) {
-    if (!lista || cycle <= 0) return NULL;
+void RemoveList(List *lista, int cycle) {
+    if (!lista || cycle <= 0) return;
 
     // lista vazia
     if (!lista->first && !lista->last) return;
 
     // um item na lista
-    if (lista->first == lista->last) { free(lista->first); return; }
+    if (lista->first == lista->last) { free(lista->first); lista->lenght--; return; }
 
     // demais itens na lista
     Cell *aux = lista->first, *last = lista->last;
-    while (getListLenght(lista) != 1) {
+    while (lista->lenght != 1) {
         for (int i = 0; i < cycle-1; i++) {
             last = aux;
             aux = aux->next;
         }
-        // printf("Saiu o %d\n", aux->idx);
+
         last->next = aux->next;
+        lista->lenght--;
 
         if (aux == lista->first) { lista->first = lista->first->next; } 
         else if (aux == lista->last) { lista->last = last; }
@@ -76,19 +81,6 @@ void PrintList(List *lista) {
         printf("%d ", aux->idx);
         aux = aux->next;
     }
-}
-
-int getListLenght(List *lista) {
-    if (!lista) return 0;
-
-    int counter = 0;
-    Cell *first = lista->first;
-    Cell *aux = lista->first;
-    if (aux) counter++;;
-
-    aux = aux->next;
-    while (first != aux) { aux = aux->next; counter++; }
-    return counter;
 }
 
 List *DefineCiclyc(List *lista) {
