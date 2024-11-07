@@ -5,26 +5,38 @@
 
 #define MAX 10
 
-typedef struct Stack Stack;
+typedef struct CharStack CharStack;
+typedef struct DoubleStack DoubleStack;
+
+CharStack *InitCharStack();
+
+void PushCharStack(CharStack *sp, char data);
+
+char PopCharStack(CharStack *sp);
+
+void PrintCharStack(CharStack *sp);
+
+void DestroyCharStack(CharStack *sp);
+
+bool IsEmptyCharStack(CharStack *sp);
+
+bool IsFullCharStack(CharStack *sp);
 
 
 
-Stack *InitStack();
+DoubleStack *InitDoubleStack();
 
-void Push(Stack *sp, void *data);
+void PushDoubleStack(DoubleStack *sp, double data);
 
-void *Pop(Stack *sp);
+double PopDoubleStack(DoubleStack *sp);
 
+void PrintDoubleStack(DoubleStack *sp);
 
-/// @brief print stack
-/// @param sp stack pointer
-/// @param wichStack 0 if numbers, 1 if operations
-void PrintStack(Stack *sp, int wichStack);
+void DestroyDoubleStack(DoubleStack *sp);
 
-void DestroyStack(Stack *sp);
+bool IsEmptyDoubleStack(DoubleStack *sp);
 
-bool IsEmptyStack(Stack *sp);
+bool IsFullDoubleStack(DoubleStack *sp);
 
-bool IsFullStack(Stack *sp);
 
 #endif

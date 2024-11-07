@@ -3,65 +3,110 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-
-struct Stack {
-    void *data[MAX];
+struct CharStack {
+    char data[MAX];
     int base, top;
 };
 
-Stack *InitStack() {
-    Stack *new = malloc(sizeof(Stack));
+CharStack *InitCharStack() {
+    CharStack *new = malloc(sizeof(CharStack));
     new->base = 0;
     new->top = -1;
     return new;
 }
 
-void Push(Stack *sp, void *data) {
-    if (!sp || !data || IsFullStack(sp)) return;
+void PushCharStack(CharStack *sp, char data) {
+    if (!sp || !data || IsFullCharStack(sp)) return;
 
     sp->top++;
     sp->data[sp->top] = data;
 }
 
-void *Pop(Stack *sp) {
-    if (!sp  || IsEmptyStack(sp)) return NULL;
+char PopCharStack(CharStack *sp) {
+    if (!sp  || IsEmptyCharStack(sp)) return '\0';
 
-    void *ans = sp->data[sp->top];
-    sp->data[sp->top] = NULL;
+    char ans = sp->data[sp->top];
+    sp->data[sp->top] = '\0';
     sp->top--;
     return ans;
 }
 
-void PrintStack(Stack *sp, int wichStack) {
+void PrintCharStack(CharStack *sp) {
     if (!sp) return;
 
-    if (wichStack == 0) {
-        printf("\tNumeros: ");
-        for(int i = 0; i < sp->top+1; i++) {
-            printf("%d ", sp->data[i]);
-        }
-        printf("\n");
-
-    } else {
-        printf("\tOperadores: ");
-        for(int i = 0; i < sp->top+1; i++) {
-            printf("%c ", sp->data[i]);
-        }
-        printf("\n");
+    printf("\tOperacoes: ");
+    for(int i = 0; i < sp->top+1; i++) {
+        printf("%c ", sp->data[i]);
     }
+    printf("\n");
 }
 
-void DestroyStack(Stack *sp) {
+void DestroyCharStack(CharStack *sp) {
     if (!sp) return;
     free(sp);
 }
 
-bool IsEmptyStack(Stack *sp) {
+bool IsEmptyCharStack(CharStack *sp) {
     if (!sp) return false;
     return sp->top == -1;
 }
 
-bool IsFullStack(Stack *sp) {
+bool IsFullCharStack(CharStack *sp) {
+    if (!sp) return false;
+    return sp->top == MAX-1;
+}
+
+// -------------------------------------------------------------------------
+
+struct DoubleStack {
+    double data[MAX];
+    int base, top;
+};
+
+DoubleStack *InitDoubleStack() {
+    DoubleStack *new = malloc(sizeof(DoubleStack));
+    new->base = 0;
+    new->top = -1;
+    return new;
+}
+
+void PushDoubleStack(DoubleStack *sp, double data) {
+    if (!sp || !data || IsFullDoubleStack(sp)) return;
+
+    sp->top++;
+    sp->data[sp->top] = data;
+}
+
+double PopDoubleStack(DoubleStack *sp) {
+    if (!sp  || IsEmptyDoubleStack(sp)) return 0;
+
+    double ans = sp->data[sp->top];
+    sp->data[sp->top] = 0;
+    sp->top--;
+    return ans;
+}
+
+void PrintDoubleStack(DoubleStack *sp) {
+    if (!sp) return;
+
+    printf("\tNumeros: ");
+    for(int i = 0; i < sp->top+1; i++) {
+        printf("%lf ", sp->data[i]);
+    }
+    printf("\n");
+}
+
+void DestroyDoubleStack(DoubleStack *sp) {
+    if (!sp) return;
+    free(sp);
+}
+
+bool IsEmptyDoubleStack(DoubleStack *sp) {
+    if (!sp) return false;
+    return sp->top == -1;
+}
+
+bool IsFullDoubleStack(DoubleStack *sp) {
     if (!sp) return false;
     return sp->top == MAX-1;
 }

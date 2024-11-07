@@ -4,45 +4,47 @@
 
 #include "stack.h"
 
-int AvaliaExpressao(char *expressao, Stack *operador, Stack *operando);
+double AvaliaExpressao(char *expressao, DoubleStack *numero, CharStack *operacoes);
 
 int main () {
-    Stack *numeros = InitStack(); // numero
-    Stack *operacoes = InitStack(); // operacao
+    DoubleStack *numeros = InitDoubleStack();
+    CharStack *operacoes = InitCharStack();
 
-    // char expressao[] = "(5*(((9+8)*(4*6))+7))";
-    char expressao[] = "(5*20)";
-    int ans = AvaliaExpressao(expressao, numeros, operacoes);
-    PrintStack(numeros, 0);
-    PrintStack(operacoes, 1);
+    char expressao[] = "(5*(((9+8)*(4*6))+7))";
+    PrintDoubleStack(numeros);
+    PrintCharStack(operacoes);
 
-    printf("\n%s = %d\n\n", expressao, ans);
+    double ans = AvaliaExpressao(expressao, numeros, operacoes);
+    printf("\n%s = %.2lf\n\n", expressao, ans);
 
-    DestroyStack(numeros); DestroyStack(operacoes);
+    DestroyDoubleStack(numeros); DestroyCharStack(operacoes);
     return 0;
 }
 
-int AvaliaExpressao(char *expressao, Stack *numeros, Stack *operacoes) {
+double AvaliaExpressao(char *expressao, DoubleStack *numeros, CharStack *operacoes) {
     if (!expressao || !numeros || !operacoes) return 0;
 
     char c = '\0';
-    for(int i = 0, c = expressao[i]; i < strlen(expressao); c = expressao[i++]) {
+    for(int i = 0; i < strlen(expressao); i++) {
+        c = expressao[i];
+
         if (c == '+' || c == '-' || c == '*' || c == '/') {
-            Push(operacoes, c);
+            PushCharStack(operacoes, c);
 
         } else if (c >= '0' && c <= '9') {
-            Push(numeros, atof(c));
+            double num = c - '0';
+            PushDoubleStack(numeros, num);
 
         } else if (c == ')') {
-            char op = Pop(operacoes);
-            double val1 = Pop(numeros), val2 = Pop(numeros), ans = 0;
+            char op = PopCharStack(operacoes);
+            double val1 = PopDoubleStack(numeros), val2 = PopDoubleStack(numeros), ans = 0;
             if      (op == '+') ans = val1 + val2;
             else if (op == '-') ans = val1 - val2; 
             else if (op == '*') ans = val1 * val2; 
-            else if (op == '/') ans = val1 / *val2; 
-            Push(numeros, ans);
+            else if (op == '/') ans = val1 / val2; 
+            PushDoubleStack(numeros, ans);
         }
     }
     
-    return Pop(numeros);
+    return PopDoubleStack(numeros);
 }
