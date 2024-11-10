@@ -18,6 +18,8 @@ void FillCrivoArray(Crivo *this_crivo) {
 
     this_crivo->array[0] = this_crivo->array[1] = '1';
     for(int i = 2; i < MAX; i++) { this_crivo->array[i] = '0'; }
+
+    PrintCrivoArray(this_crivo);
 }
 
 void ExecuteCrivo(Crivo *this_crivo) {
