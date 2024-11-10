@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <time.h>
 
-#include "crivo.h"
+#include "tipos/crivo.h"
 
 int main () {
     clock_t start = clock();
