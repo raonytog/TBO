@@ -3,7 +3,7 @@
 
 typedef struct Crivo Crivo;
 
-#define MAX 100
+#define MAX 100000
 
 Crivo *InitCrivo();
 
