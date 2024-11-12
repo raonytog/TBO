@@ -4,10 +4,11 @@
 
 #include "tipos/crivo.h"
 
-int main () {
+int main (int argc, char const *argv[]) {
     clock_t start = clock();
 
-    Crivo *crivo = InitCrivo();
+    unsigned long int size = atol(argv[1]);
+    Crivo *crivo = InitCrivo(size);
     ExecuteCrivo(crivo);
     DestroyCrivo(crivo);
 
