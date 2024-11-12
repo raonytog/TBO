@@ -12,11 +12,11 @@
 typedef struct map bitmap;
 
 unsigned char* bitmapGetContents(bitmap* bm);
-unsigned int bitmapGetMaxSize(bitmap* bm);
-unsigned int bitmapGetLength(bitmap* bm);
-bitmap* bitmapInit(unsigned int max_size);
-unsigned char bitmapGetBit(bitmap* bm, unsigned int index);
-void bitmapSetBit(bitmap* bm, unsigned int index, unsigned char bit);
+unsigned long int bitmapGetMaxSize(bitmap* bm);
+unsigned long int bitmapGetLength(bitmap* bm);
+bitmap* bitmapInit(unsigned long int max_size);
+unsigned char bitmapGetBit(bitmap* bm, unsigned long int index);
+void bitmapSetBit(bitmap* bm, unsigned long int index, unsigned char bit);
 void bitmapAppendLeastSignificantBit(bitmap* bm, unsigned char bit);
 void bitmapLibera (bitmap* bm);
 

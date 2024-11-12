@@ -3,9 +3,7 @@
 
 typedef struct Crivo Crivo;
 
-#define MAX 100000
-
-Crivo *InitCrivo();
+Crivo *InitCrivo(unsigned long int size);
 
 void FillCrivoArray(Crivo *this_crivo);
 

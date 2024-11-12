@@ -1,4 +1,4 @@
 Memory consumption in bytes for N = 100_000:
 sieve_int   401,024 bytes allocated
-sieve_char  1,000,001,024 bytes allocated
+sieve_char  101,040 bytes allocatedss
 sieve_bit   13,548 bytes allocated

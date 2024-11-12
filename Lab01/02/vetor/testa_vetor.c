@@ -2,17 +2,18 @@
 #include <stdlib.h>
 #include <time.h>
 
-void fillVector(long unsigned int *array, long unsigned int size);
-void printArray(long unsigned int *array, long unsigned int size);
-void findLeader(long unsigned int *array, long unsigned int size, int cycle);
-
+void fillVector(int *array, long unsigned int size);
+void printArray(int *array, long unsigned int size);
+void findLeader(int *array, long unsigned int size, int cycle);
 
 int main (int argc, char const *argv[]) {
     clock_t start = clock();
 
     long unsigned int N = atol(argv[1]), cycle = 10;
-    long unsigned int vetor[N]; fillArray(vetor, N);
+    int *vetor = malloc(N * sizeof(int));
+    fillArray(vetor, N);
     findLeader(vetor, N, cycle);
+    free(vetor);
 
     clock_t end = clock();
     double sec = ( (double)end - (double)start ) / CLOCKS_PER_SEC;
@@ -21,18 +22,18 @@ int main (int argc, char const *argv[]) {
     return 0;
 }
 
-void fillArray(long unsigned int *array, long unsigned int size) {
+void fillArray(int *array, long unsigned int size) {
     if (!array || size <= 0) return;
     for (long unsigned int i = 0; i < size; i++) array[i] = i+1;
 }
 
-void printArray(long unsigned int *array, long unsigned int size) {
+void printArray(int *array, long unsigned int size) {
     if (!array || size <= 0) return;
     for (long unsigned int i = 0; i < size; i++) printf("%ld ", array[i]);
     printf("\n");
 }
 
-void findLeader(long unsigned int *array, long unsigned int size, int cycle) {
+void findLeader(int *array, long unsigned int size, int cycle) {
     long unsigned int len = size, idx = 0;
 
     long unsigned int contador;

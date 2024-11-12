@@ -10,8 +10,8 @@
 #include "bitmap.h"
 
 struct map {
-    unsigned int max_size;        ///< tamanho maximo em bits
-    unsigned int length;         ///< tamanho atual em bits
+    unsigned long int max_size;        ///< tamanho maximo em bits
+    unsigned long int length;         ///< tamanho atual em bits
     unsigned char* contents;     ///< conteudo do mapa de bits
 };
 
@@ -36,25 +36,25 @@ unsigned char* bitmapGetContents(bitmap* bm) { return bm->contents; }
  * @param bm O mapa de bits.
  * @return O tamanho maximo do mapa de bits.
  */
-unsigned int bitmapGetMaxSize(bitmap* bm) { return bm->max_size; }
+unsigned long int bitmapGetMaxSize(bitmap* bm) { return bm->max_size; }
 
 /**
  * Retorna o tamanho atual do mapa de bits.
  * @param bm O mapa de bits.
  * @return O tamanho atual do mapa de bits.
  */
-unsigned int bitmapGetLength(bitmap* bm) { return bm->length; }
+unsigned long int bitmapGetLength(bitmap* bm) { return bm->length; }
 
 /**
  * Constroi um novo mapa de bits, definindo um tamanho maximo.
  * @param max_size O tamanho maximo para o mapa de bits.
  * @return O mapa de bits inicializado.
  */
-bitmap* bitmapInit(unsigned int max_size) {
+bitmap* bitmapInit(unsigned long int max_size) {
 	bitmap* bm = (bitmap*)malloc(sizeof(bitmap));
 
 	// definir tamanho maximo em bytes, com arredondamento para cima
-	unsigned int max_sizeInBytes=(max_size+7)/8;
+	unsigned long int max_sizeInBytes=(max_size+7)/8;
 
 	// alocar espaco de memoria para o tamanho maximo em bytes
 	bm->contents=calloc(max_sizeInBytes, sizeof(char));
@@ -63,7 +63,7 @@ bitmap* bitmapInit(unsigned int max_size) {
 	assert(bm->contents!=NULL, "Erro de alocacao de memoria.");
 
 	// definir valores iniciais para tamanho maximo e tamanho atual
-	bm->max_size=max_size;
+	bm->max_size = max_size;
 	bm->length=0;
 	return bm;
 }
@@ -75,7 +75,7 @@ bitmap* bitmapInit(unsigned int max_size) {
  * @pre index<bitmapGetLength(bm)
  * @return O valor do bit.
  */
-unsigned char bitmapGetBit(bitmap* bm, unsigned int index) { // index in bits 
+unsigned char bitmapGetBit(bitmap* bm, unsigned long int index) { // index in bits 
 	// verificar se index<bm.length, pois caso contrario, index e' invalido
 	assert(index<bm->length, "Acesso a posicao inexistente no mapa de bits.");
 
@@ -91,7 +91,7 @@ unsigned char bitmapGetBit(bitmap* bm, unsigned int index) { // index in bits
  * @param bit O novo valor do bit.
  * @post bitmapGetBit(bm,index)==bit
  */
-void bitmapSetBit(bitmap* bm, unsigned int index, unsigned char bit) {
+void bitmapSetBit(bitmap* bm, unsigned long int index, unsigned char bit) {
     // verificar se index<bm->length, pois caso contrario, index e' invalido
     assert(index<bm->length, "Acesso a posicao inexistente no mapa de bits.");
 

@@ -8,9 +8,9 @@ struct Crivo {
     bitmap *map;
 };
 
-Crivo *InitCrivo() {
+Crivo *InitCrivo(unsigned long int size) {
     Crivo *this_crivo = malloc(sizeof(Crivo));
-    this_crivo->map = bitmapInit(MAX);
+    this_crivo->map = bitmapInit(size);
     FillCrivoArray(this_crivo);
     return this_crivo;
 }
@@ -21,16 +21,16 @@ void FillCrivoArray(Crivo *this_crivo) {
     bitmapAppendLeastSignificantBit(this_crivo->map, 1);
     bitmapAppendLeastSignificantBit(this_crivo->map, 1);
     
-    for(int i = 2; i < MAX; i++) { 
+    for(int i = 2; i < bitmapGetMaxSize(this_crivo->map); i++) { 
         bitmapAppendLeastSignificantBit(this_crivo->map, 0);
     }
 }
 
 
 void ExecuteCrivo(Crivo *this_crivo) {
-    for (int i = 2; i < MAX; i++) {
+    for (int i = 2; i < bitmapGetMaxSize(this_crivo->map); i++) {
         if (bitmapGetBit(this_crivo->map, i) == '1') continue;
-        for (int j = i*2; j < MAX; j += i) {
+        for (int j = i*2; j < bitmapGetMaxSize(this_crivo->map); j += i) {
             bitmapSetBit(this_crivo->map, j, 1);
         }
     }
@@ -39,12 +39,12 @@ void ExecuteCrivo(Crivo *this_crivo) {
 void PrintCrivoArray(Crivo *this_crivo) {
     if (!this_crivo) return;
 
-    for(int i = 0; i < MAX; i++) { printf("%0x ", bitmapGetBit(this_crivo->map, i)); }
+    for(int i = 0; i < bitmapGetLength(this_crivo); i++) { printf("%0x ", bitmapGetBit(this_crivo->map, i)); }
     printf("\n");
 }
 
 void PrintCrivoPrimes(Crivo *this_crivo) {
-    for(int i = 0; i < MAX; i++) { 
+    for(int i = 0; i < bitmapGetLength(this_crivo); i++) { 
         if (bitmapGetBit(this_crivo->map, i) == 0) { printf("%d ", i); }
     }
     printf("\n");

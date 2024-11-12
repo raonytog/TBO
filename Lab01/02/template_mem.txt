@@ -1,4 +1,3 @@
 Memory consumption in bytes for N = 100000, M = 10:
 list    1,601,048 bytes allocated
-array   1,024 bytes allocated
-
+array   401,024 bytes allocated
