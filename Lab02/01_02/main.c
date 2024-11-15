@@ -14,8 +14,6 @@ int main (int argc, char const *argv[]) {
         tree = InsertBst(tree, r);
     }
 
-    // PrintBst(tree); printf("\n");
-
     printf("Altura: %d\n", HightBst(tree));
 
     DestroyBst(tree);

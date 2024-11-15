@@ -2,6 +2,10 @@ size = 1000000000
 
 
 # ---------------- LIST ----------------
+compList:
+	clear
+	gcc lista/*.c -o prog
+
 memList:
 	clear
 	gcc lista/*.c -o prog
@@ -14,6 +18,10 @@ timeList:
 
 
 # ---------------- VET ----------------
+compVet:
+	clear
+	gcc vetor/*.c -o prog
+
 memVet:
 	clear
 	gcc vetor/*.c -o prog

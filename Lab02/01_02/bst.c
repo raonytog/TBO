@@ -61,3 +61,7 @@ void PrintBst(Bst *tree) {
     }
     printf(")");
 }
+
+void rec_preorder(Bst *tree, Visit visitFunc);
+void rec_inorder(Bst *tree, Visit visitFunc);
+void rec_postorder(Bst *tree, Visit visitFunc);

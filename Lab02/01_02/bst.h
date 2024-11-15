@@ -17,4 +17,9 @@ int HightBst(Bst *tree);
 
 void PrintBst(Bst *tree);
 
+typedef void (*Visit)(Bst*);
+void rec_preorder(Bst *tree, Visit visitFunc);
+void rec_inorder(Bst *tree, Visit visitFunc);
+void rec_postorder(Bst *tree, Visit visitFunc);
+
 #endif
