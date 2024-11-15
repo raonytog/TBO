@@ -39,12 +39,12 @@ void ExecuteCrivo(Crivo *this_crivo) {
 void PrintCrivoArray(Crivo *this_crivo) {
     if (!this_crivo) return;
 
-    for(int i = 0; i < bitmapGetLength(this_crivo); i++) { printf("%0x ", bitmapGetBit(this_crivo->map, i)); }
+    for(int i = 0; i < bitmapGetLength(this_crivo->map); i++) { printf("%0x ", bitmapGetBit(this_crivo->map, i)); }
     printf("\n");
 }
 
 void PrintCrivoPrimes(Crivo *this_crivo) {
-    for(int i = 0; i < bitmapGetLength(this_crivo); i++) { 
+    for(int i = 0; i < bitmapGetLength(this_crivo->map); i++) { 
         if (bitmapGetBit(this_crivo->map, i) == 0) { printf("%d ", i); }
     }
     printf("\n");

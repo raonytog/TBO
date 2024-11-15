@@ -11,10 +11,8 @@ struct Crivo {
 
 Crivo *InitCrivo(unsigned long int size) {
     Crivo *this_crivo = malloc(sizeof(Crivo));
-    this_crivo->size = size;
-    
-    // Aloca um bloco de memória contíguo para 'size' caracteres
     this_crivo->array = malloc(size * sizeof(char));
+    this_crivo->size = size;
     
     FillCrivoArray(this_crivo);
     return this_crivo;
@@ -23,7 +21,6 @@ Crivo *InitCrivo(unsigned long int size) {
 void FillCrivoArray(Crivo *this_crivo) {
     if (!this_crivo) return;
 
-    // Inicializa o array
     this_crivo->array[0] = '1';
     this_crivo->array[1] = '1';
     for(unsigned long int i = 2; i < this_crivo->size; i++) {
