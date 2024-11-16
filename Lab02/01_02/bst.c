@@ -10,6 +10,8 @@ struct Bst {
 
 Bst *EmptyBst() { return NULL; }
 
+bool IsEmptyBst(Bst *tree) { return tree == NULL; }
+
 Bst *InitBst(int key) {
     Bst *new = malloc(sizeof(Bst));
     new->key = key;
@@ -57,35 +59,89 @@ int HightBst(Bst *tree) {
 
 void PrintBstContent(Bst *tree) {
     if (!tree) return;
-    printf("%d ", GetKeyBst(tree));
+    // printf("%d ", GetKeyBst(tree));
 }
 
 void rec_preorder(Bst *tree, Visit visitFunc) {
-    printf("(");
     if (tree) {
         visitFunc(tree);
         rec_preorder(tree->left, visitFunc);
         rec_preorder(tree->right, visitFunc);
     }
-    printf(")");
 }
 
 void rec_inorder(Bst *tree, Visit visitFunc) {
-    printf("(");
     if (tree) {
         rec_inorder(tree->left, visitFunc);
         visitFunc(tree);
         rec_inorder(tree->right, visitFunc);
     }
-    printf(")");
 }
 
 void rec_postorder(Bst *tree, Visit visitFunc) {
-    printf("(");
     if (tree) {
         rec_postorder(tree->left, visitFunc);
         rec_postorder(tree->right, visitFunc);
         visitFunc(tree);
     }
-    printf(")");
+}
+
+void stack_preorder(Bst *tree, Stack *sp) {
+    Bst *aux = tree;
+    while (true) {
+        while (aux) {
+            PrintBstContent(aux);
+            PushStack(sp, aux);
+            aux = aux->left;
+        }
+
+        if (IsEmptyStack(sp)) break;
+        aux = PopStack(sp);
+        aux = aux->right;
+    }
+}
+
+void stack_inorder(Bst *tree, Stack *sp) {
+    Bst *aux = tree;
+    while (true) {
+        while (aux) {
+            PushStack(sp, aux);
+            aux = aux->left;
+        }
+
+        if (IsEmptyStack(sp)) break;
+        aux = PopStack(sp);
+        PrintBstContent(aux);
+        aux = aux->right;
+    }
+}
+
+/** Nao ta funcionando direito essa joça */
+void stack_postorder(Bst *tree, Stack *sp) {
+    Bst *aux = tree;
+    while (true) {
+        while (aux) {
+            PushStack(sp, aux);
+            aux = aux->left;
+        }
+
+        aux = PopStack(sp);
+        PrintBstContent(aux);
+        aux = aux->right;
+
+        if (IsEmptyStack(sp)) break;
+    }
+}
+
+void queue_levelorder(Bst *tree, Queue *q) {
+    if (!tree || !q) return;
+
+    Bst *auxiliar = tree;
+    Enqueue(q, auxiliar);
+    while (!IsEmpityQueue(q)) {
+        auxiliar = Dequeue(q);
+        if (auxiliar->left)  { Enqueue(q, auxiliar->left); }
+        if (auxiliar->right) { Enqueue(q, auxiliar->right); }
+        PrintBstContent(auxiliar);
+    }
 }

@@ -3,7 +3,7 @@
 
 #include <stdbool.h>
 
-#define MAX 10
+#define MAX 100
 
 typedef struct Stack Stack;
 typedef void(*printStack)(void*);

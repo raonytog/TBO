@@ -1,9 +1,17 @@
-timeBst:
+size = 100000000
+
+compBst:
 	clear
-	gcc *.c -o prog
-	time ./prog 5
+	gcc *.c -o bst
+
+runBst:
+	make compBst
+	./bst $(size)
+
+timeBst:
+	make compBst
+	time ./bst $(size)
 
 memBst:
-	clear
-	gcc *.c -o prog
-	valgrind ./prog 5
+	make compBst
+	valgrind ./bst $(size)
