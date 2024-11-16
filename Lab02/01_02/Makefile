@@ -1,4 +1,4 @@
-size = 100000000
+size = 10000000
 
 compBst:
 	clear

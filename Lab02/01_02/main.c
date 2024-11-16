@@ -16,15 +16,14 @@ void time_stack_postorder(Bst *tree, Stack *sp);
 
 void time_queue_levelorder(Bst *tree, Queue *q);
 
-// int argc, char const *argv[]
 int main (int argc, char const *argv[]) {
     int N = atoi(argv[1]), r = 0;
     // int N = 10000000, r = 0;
 
     srand(time(NULL));
 
-    Stack *sp = InitStack();
     Queue *q = InitQueue();
+    Stack *sp = InitStack();
     Bst *tree = EmptyBst();
     for (int i = 0 ;i < N; i++) {
         r = rand();
@@ -45,9 +44,7 @@ int main (int argc, char const *argv[]) {
     time_queue_levelorder(tree, q);
     printf("\n");
     
-    DestroyStack(sp);
-    DestroyBst(tree);
-
+    DestroyQueue(q);    DestroyStack(sp);   DestroyBst(tree);
     return 0;
 }
 
