@@ -85,7 +85,7 @@ void time_stack_inorder(Bst *tree, Stack *sp) {
 
 void time_stack_postorder(Bst *tree, Stack *sp) {
     clock_t start = clock();
-    // stack_postorder(tree, sp); printf("\n");
+    stack_postorder(tree, sp);
     clock_t end = clock();
     printf("Stack PostOrder: %lf\n", ((double)end - (double)start )/CLOCKS_PER_SEC);
 }

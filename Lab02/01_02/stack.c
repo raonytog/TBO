@@ -31,6 +31,11 @@ void* PopStack(Stack *sp) {
     return ans;
 }
 
+void* PeekStack(Stack *sp) {
+    if (!sp  || IsEmptyStack(sp)) return '\0';
+    return sp->data[sp->top];
+}
+
 void PrintStack(Stack *sp, printStack printSp) {
     if (!sp) return;
 

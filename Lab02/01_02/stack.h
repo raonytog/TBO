@@ -14,6 +14,8 @@ void PushStack(Stack *sp, void *data);
 
 void* PopStack(Stack *sp);
 
+void* PeekStack(Stack *sp);
+
 void PrintStack(Stack *sp, printStack printSp);
 
 void DestroyStack(Stack *sp);

@@ -122,14 +122,15 @@ void stack_postorder(Bst *tree, Stack *sp) {
     while (true) {
         while (aux) {
             PushStack(sp, aux);
+            PushStack(sp, aux);
             aux = aux->left;
         }
 
+        if (IsEmptyStack(sp)) { break; }
         aux = PopStack(sp);
-        PrintBstContent(aux);
-        aux = aux->right;
-
-        if (IsEmptyStack(sp)) break;
+        
+        if (PeekStack(sp) == aux) { aux = aux->right; }
+        else { PrintBstContent(aux); aux = NULL; }
     }
 }
 
