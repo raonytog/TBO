@@ -17,18 +17,15 @@ void time_stack_postorder(Bst *tree, Stack *sp);
 void time_queue_levelorder(Bst *tree, Queue *q);
 
 int main (int argc, char const *argv[]) {
-    int N = atoi(argv[1]), r = 0;
-    // int N = 10000000, r = 0;
+    int N = atoi(argv[1]);
+    // int N = 10000000;
 
     srand(time(NULL));
 
     Queue *q = InitQueue();
     Stack *sp = InitStack();
     Bst *tree = EmptyBst();
-    for (int i = 0 ;i < N; i++) {
-        r = rand();
-        tree = InsertBst(tree, r);
-    }
+    for (int i = 0 ;i < N; i++) { tree = InsertBst(tree, rand()); }
     printf("Altura da arvore: %d\n\n", HightBst(tree));
 
     time_rec_preorder(tree);
