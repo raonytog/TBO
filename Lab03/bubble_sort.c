@@ -9,6 +9,7 @@ void sort(Item *a, int lo, int hi) {
         if (less(a[i], a[j] == false)) { return; }
     }
 
+    /** bubble sort padrao */
     for (int i = lo; i < hi-1; i++) {
         for(int j = i+1; j < hi; j++) {
             compexch(a[i], a[j]);

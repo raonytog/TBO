@@ -3,6 +3,16 @@
 #define true 1
 #define false 0
 
+/**
+ * Ordena da esquerda a direita
+ * Verifica se houve alguma troca (caso contrario, o vetor ja esta ordenado)
+ * Se houver troca, decrementa o limite superior
+ * Ordena da direita a esquerda
+ * Verifica se houve alguma troca (caso contrario, o vetor ja esta ordenado)
+ * Se houver troca, decrementa o limite inferior
+ * 
+ * Repete até que nao aconteca trocas nas iteracoes
+ */
 void sort(Item *a, int lo, int hi) {
     int trade = true;
     int start = lo;

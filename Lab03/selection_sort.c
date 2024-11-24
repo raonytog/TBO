@@ -1,5 +1,8 @@
 #include "item.h"
 
+/** Ordena em subgrupos, mas so realiza uma troca por indice i, sendo sempre
+ * com o menor valor encontrado dos valors dos indices superiores ao indcie i
+ */
 void sort(Item *a, int lo, int hi) {
     for (int i = lo; i < hi; i++) {
         int min = i;
