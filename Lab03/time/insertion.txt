@@ -1,0 +1,6 @@
+time in seconds
+
+sort distrib    nearly      reverse     sorted      unif_rand
+1K              
+10K             
+100K            

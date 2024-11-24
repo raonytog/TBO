@@ -1,0 +1,9 @@
+# ignore compiled files
+bubble
+insertion
+selection
+shaker
+
+# ignore objects and vscode dir
+*.o
+.vscode
