@@ -1,4 +1,5 @@
 #include "item.h"
+
 /**
  * Ordena em subgrupos, mas com varias trocas por indice i:
  * os subgrupos são todos os numeros que estão em posicoões anteriores ao indice i
