@@ -1,6 +1,6 @@
 time in seconds
 
 sort distrib    nearly      reverse     sorted      unif_rand
-1K              
-10K             
-100K            
+1K              0.00        0.00        0.00        0.00
+10K             0.10        0.17        0.11        0.14
+100K            11.17       17.41       10.93       14.09

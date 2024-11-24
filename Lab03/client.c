@@ -25,7 +25,7 @@ int main(int argc, char const *argv[]) {
     int hi = 0;
     Item *itens = CreateItem(path, &hi);
     double time = GetTimeToSort(itens, 0, hi);
-    // PrintItem(itens, hi);
+    PrintItem(itens, hi);
 
     printf("\n\nTime spent: %lf\n", time);
     DestroyItem(itens);

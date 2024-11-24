@@ -1,7 +1,7 @@
   path = "in/nearly_sorted/100Knearly_sorted.txt"
-#  path = "in/reverse_sorted/100Kreverse_sorted.txt"
-#  path = "in/sorted/10Ksorted.txt"
-#  path = "in/unif_rand/100Kunif_rand.txt"
+#  path = "in/reverse_sorted/1Kreverse_sorted.txt"
+#  path = "in/sorted/100Ksorted.txt"
+#  path = "in/unif_rand/10Kunif_rand.txt"
 
 # bubble sort
 bub:
