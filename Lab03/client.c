@@ -13,14 +13,14 @@ void PrintItem(Item *a, int size);
 void DestroyItem(Item *a);
 double GetTimeToSort(Item *a, int lo, int hi);
 
-char path[500];
 
 int main(int argc, char const *argv[]) {
     if (argc <= 1) {
         printf("ERROR: file directory not found\n"); 
         exit(1);
     }
-    strcpy(path, argv[1]);
+
+    char path[500];     strcpy(path, argv[1]);
 
     int hi = 0;
     Item *itens = CreateItem(path, &hi);
