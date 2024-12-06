@@ -107,11 +107,13 @@ void predict(Particle *p) {
     //       Faça os seguintes passos nessa função.
 
     // - Se p é nulo, retorne imediatamente.
+    if (!p) return;
 
     // - Calcule o tempo de colisão de 'p' com todas as partículas do vetor
     //   de partículas usando a função 'time_to_hit'. Se a colisão vai ocorrer
     //   dentro do limite de tempo da simulação (variável global 'limit'), crie
     //   um evento e insira-o na fila.
+    
 
     // - Calcule o tempo de colisão de 'p' com a parede vertical utilizando a
     //   função 'time_to_hit_vertical_wall'. Se a colisão vai ocorrer
