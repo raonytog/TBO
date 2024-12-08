@@ -39,7 +39,7 @@ double get_time(Event *e);
 
 /*
  * Compara dois eventos pelos os seus tempos.
- * Retorna um valor negativo se e.time < f.time.
+ * Retorna um valor negativo se e.time > f.time.
  * Retorna um valor positivo se e.time < f.time.
  * Retorna zero se e.time == f.time.
  */

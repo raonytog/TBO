@@ -9,8 +9,7 @@
 
 static int PQ_max_size(PQ *pq);
 static void fix_up(PQ *pq, int N);
-static void fix_down(PQ *pq, int N);
-
+static void fix_down(PQ *pq, int size, int N);
 
 // TODO: Aqui você deve implementar uma fila com prioridade mínima para
 //       ordenar os eventos por tempo, isto é, o evento com o menor tempo tem
@@ -43,11 +42,7 @@ PQ* PQ_create(int max_N) {
     PQ *queue = malloc(sizeof(PQ));
     queue->max_size = max_N;
     queue->current_size = 0;
-
-    queue->array = calloc(PQ_size(queue), sizeof(PQ));
-    for(int i = 0; i < PQ_max_size(queue); i++) {
-        queue->array[i] = malloc(sizeof(PQ));
-    }
+    queue->array = malloc(max_N * sizeof(Event**));
 
     return queue;
 }
@@ -61,7 +56,10 @@ PQ* PQ_create(int max_N) {
 void PQ_destroy(PQ *pq) {
     if (!pq) return;
 
-    for (int i = 0; i < PQ_size(pq); i++) { free(pq->array[i]); }
+    for (int i = 0; i < PQ_size(pq); i++) {
+        free(pq->array[i]);
+    }
+
     free(pq->array);
     free(pq);
 }
@@ -76,8 +74,6 @@ void PQ_destroy(PQ *pq) {
  *   //       dores de cabeça com acessos inválidos na memória.
  */
 void PQ_insert(PQ *pq, Event *e) {
-    
-
     if (!pq || !e) return;
     if (PQ_size(pq) == PQ_max_size(pq)) return;
 
@@ -94,9 +90,11 @@ void PQ_insert(PQ *pq, Event *e) {
 Event* PQ_delmin(PQ *pq) {
     if (!pq) return NULL;
 
-    Event *min = pq->array[0];
-    exch(pq->array[PQ_size(pq)], pq->array[0]);
+    Event *min = pq->array[1];
+    exch(pq->array[PQ_size(pq)], pq->array[1]);
     pq->current_size--;
+
+    fix_down(pq, PQ_size(pq), 1);
 
     return min;
 }
@@ -125,14 +123,25 @@ static int PQ_max_size(PQ *pq) {
 static void fix_up(PQ *pq, int N) {
     if (!pq || N <= 0) return;
 
-    while (N < 1) {
-        if (compare(pq->array[N], pq->array[N/2]) < 0) { 
-            exch(pq->array[N], pq->array[N/2]);
-        }
+    while (N < 1 && compare(pq->array[N/2], pq->array[N] > 0)) {
+        exch(pq->array[N], pq->array[N/2]);
         N = N/2;
     }
 }
 
-static void fix_down(PQ *pq, int N) {
-    return;
+static void fix_down(PQ *pq, int size, int N) {
+    if (!pq || size <= 0 || N <= 0) return;
+
+    int i = 0;
+    while (2*N <= size) {
+        i = 2*N;
+        if (i < size && compare(pq->array[i], pq->array[i+1] > 0))
+            i++;
+
+        if (compare(pq->array[N], pq->array[i]) <= 0) 
+            break;
+
+        exch(pq->array[N], pq->array[i])
+        N = i;
+    }
 }
