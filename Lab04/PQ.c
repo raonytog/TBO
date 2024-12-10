@@ -123,7 +123,7 @@ static int PQ_max_size(PQ *pq) {
 static void fix_up(PQ *pq, int N) {
     if (!pq || N <= 0) return;
 
-    while (N < 1 && compare(pq->array[N/2], pq->array[N] > 0)) {
+    while (N < 1 && compare(pq->array[N/2], pq->array[N]) > 0) {
         exch(pq->array[N], pq->array[N/2]);
         N = N/2;
     }
@@ -135,7 +135,7 @@ static void fix_down(PQ *pq, int size, int N) {
     int i = 0;
     while (2*N <= size) {
         i = 2*N;
-        if (i < size && compare(pq->array[i], pq->array[i+1] > 0))
+        if (i < size && compare(pq->array[i], pq->array[i+1]) > 0)
             i++;
 
         if (compare(pq->array[N], pq->array[i]) <= 0) 

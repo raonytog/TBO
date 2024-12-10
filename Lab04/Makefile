@@ -3,7 +3,7 @@ all:
 
 comp:
 	clear
-	gcc *.c prog -Wall -lm -lglut - lGL 
+	gcc *.c -o prog -lm -lGl
 
 clean:
 	rm -f *.o a.out
