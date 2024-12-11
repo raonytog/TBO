@@ -56,10 +56,7 @@ PQ* PQ_create(int max_N) {
 void PQ_destroy(PQ *pq) {
     if (!pq) return;
 
-    for (int i = 0; i < PQ_size(pq); i++) {
-        free(pq->array[i]);
-    }
-
+    for (int i = 0; i < PQ_size(pq); i++) { free(pq->array[i]); }
     free(pq->array);
     free(pq);
 }
@@ -75,7 +72,7 @@ void PQ_destroy(PQ *pq) {
  */
 void PQ_insert(PQ *pq, Event *e) {
     if (!pq || !e) return;
-    if (PQ_size(pq) == PQ_max_size(pq)) return;
+    if (PQ_size(pq) == PQ_max_size(pq)) { printf("PQ is full\n"); return; }
 
     pq->current_size++;
     pq->array[pq->current_size] = e;
@@ -88,7 +85,10 @@ void PQ_insert(PQ *pq, Event *e) {
  *   //       fila e o retorna.
  */
 Event* PQ_delmin(PQ *pq) {
-    if (!pq || PQ_size(pq) == 0) return NULL;
+    if (!pq || PQ_size(pq) == 0) { 
+        printf("PQ does not exist or pq size is 0!\n"); 
+        return NULL; 
+    }
 
     Event *min = pq->array[1];
     exch(pq->array[PQ_size(pq)], pq->array[1]);

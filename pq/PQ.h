@@ -2,6 +2,7 @@
 #define PQ_H
 
 #include <stdbool.h>
+#include "event.h"
 
 typedef struct pq PQ;
 
@@ -18,18 +19,17 @@ void PQ_destroy(PQ *pq);
 /*
  * Insere o evento na fila segundo o seu tempo.
  */
-void PQ_insert(PQ *pq, int data);
+void PQ_insert(PQ *pq, Event *e);
 
 /*
  * Remove e retorna o evento mais próximo.
  */
-int PQ_delmin(PQ *pq);
+Event* PQ_delmin(PQ *pq);
 
 /*
  * Testa se a fila está vazia.
  */
 bool PQ_is_empty(PQ *pq);
-
 /*
  * Retorna o tamanho da fila.
  */

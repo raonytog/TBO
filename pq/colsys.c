@@ -110,7 +110,7 @@ void predict(Particle *p) {
     for (int i = 0; i < N; i++) { 
         time_particles = time_to_hit(p, particles[i]);
         if (time_particles + t < limit) {
-            Event *event = create_event(time_particles+t, p, NULL);
+            Event *event = create_event(time_particles + t, p, NULL);
             PQ_insert(pq, event);
         }
     }
@@ -124,7 +124,7 @@ void predict(Particle *p) {
     //   como nula.
     double time_vertical_wall = time_to_hit_vertical_wall(p);
     if (time_vertical_wall + t < limit) {
-        Event *event = create_event(time_vertical_wall+t, p, NULL);
+        Event *event = create_event(time_vertical_wall, p, NULL);
         PQ_insert(pq, event);
     }
 
@@ -137,7 +137,7 @@ void predict(Particle *p) {
     //   como nula.
     double time_horizontal_wall = time_to_hit_horizontal_wall(p);
     if (time_horizontal_wall + t < limit) {
-        Event *event = create_event(time_horizontal_wall+t, NULL, p);
+        Event *event = create_event(time_horizontal_wall, NULL, p);
         PQ_insert(pq, event);
     }
 }
