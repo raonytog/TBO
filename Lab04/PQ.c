@@ -88,7 +88,7 @@ void PQ_insert(PQ *pq, Event *e) {
  *   //       fila e o retorna.
  */
 Event* PQ_delmin(PQ *pq) {
-    if (!pq) return NULL;
+    if (!pq || PQ_size(pq) == 0) return NULL;
 
     Event *min = pq->array[1];
     exch(pq->array[PQ_size(pq)], pq->array[1]);
