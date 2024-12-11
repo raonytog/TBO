@@ -77,3 +77,11 @@ bool is_valid(Event *e) {
     if (e->b != NULL && hit_count(e->b) != e->count_B) return false;
     return true;
 }
+
+void print_event(Event *e) {
+    if (!e) return;
+
+    if (get_A(e)) printf("count_a: %d\n", e->count_A);
+    if (get_B(e)) printf("count_b: %d\n", e->count_B);
+    printf("time: %d\n", e->time);
+}

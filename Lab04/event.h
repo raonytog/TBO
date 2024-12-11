@@ -51,4 +51,6 @@ int compare(Event *e, Event *f);
  */
 bool is_valid(Event *e);
 
+void print_event(Event *e);
+
 #endif

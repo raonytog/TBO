@@ -111,7 +111,7 @@ bool PQ_is_empty(PQ *pq) {
  * Retorna o tamanho da fila.
  */
 int PQ_size(PQ *pq) {
-    if (!pq) return false;
+    if (!pq) return 0;
     return pq->current_size;
 }
 
@@ -123,7 +123,7 @@ static int PQ_max_size(PQ *pq) {
 static void fix_up(PQ *pq, int N) {
     if (!pq || N <= 0) return;
 
-    while (N < 1 && compare(pq->array[N/2], pq->array[N]) > 0) {
+    while (N > 1 && compare(pq->array[N/2], pq->array[N]) > 0) {
         exch(pq->array[N], pq->array[N/2]);
         N = N/2;
     }
@@ -141,7 +141,7 @@ static void fix_down(PQ *pq, int size, int N) {
         if (compare(pq->array[N], pq->array[i]) <= 0) 
             break;
 
-        exch(pq->array[N], pq->array[i])
+        exch(pq->array[N], pq->array[i]);
         N = i;
     }
 }
