@@ -1,7 +1,7 @@
 #  path = "input/nearly_sorted/1000000.txt"
 #  path = "input/reverse_sorted/1000000.txt"
-  path = "input/sorted/1000000.txt"
-#  path = "input/unif_rand/100000.txt"
+#  path = "input/sorted/1000000.txt"
+  path = "input/unif_rand/1000000.txt"
 
 m1:
 	clear
