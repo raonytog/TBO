@@ -1,0 +1,7 @@
+{
+    "files.associations": {
+        "item.h": "c",
+        "sort.h": "c",
+        "random": "c"
+    }
+}

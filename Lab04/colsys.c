@@ -110,7 +110,7 @@ void predict(Particle *p) {
     for (int i = 0; i < N; i++) { 
         time_particles = time_to_hit(p, particles[i]);
         if (time_particles + t < limit) {
-            Event *event = create_event(time_particles+t, p, NULL);
+            Event *event = create_event(time_particles+t, p, particles[i]);
             PQ_insert(pq, event);
         }
     }

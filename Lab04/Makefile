@@ -4,15 +4,15 @@ all:
 
 runP:
 	make all
-	./a.out "100" "in/pendulum4.txt" 
+	./a.out "4" "in/pendulum4.txt" 
 
 runB:
 	make all
-	./a.out "100" "in/billiards11.txt"
+	./a.out "11" "in/billiards11.txt"
 
 runD:
 	make all
-	./a.out "100" "in/diffusion200.txt"
+	./a.out "200" "in/diffusion200.txt"
 
 clean:
 	rm -f *.o a.out pq
