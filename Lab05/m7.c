@@ -3,9 +3,9 @@
 #define SZ2 (sz + sz)
 #define MIN(X, Y) ((X < Y) ? (X) : (Y))
 
-#define CUTOFF 1000
-
 void merge(Item *a, Item *aux, int lo, int mid, int hi) {
+    if (!less(a[mid+1], a[mid])) return;
+
     for (int k = lo; k <= hi; k++)
         aux[k] = a[k];
 
@@ -16,19 +16,6 @@ void merge(Item *a, Item *aux, int lo, int mid, int hi) {
         else if (less(aux[j], aux[i])) a[k] = aux[j++];
         else a[k] = aux[i++];
     }   
-}
-
-void merge_sort(Item *array, Item *aux, int lo, int hi) {
-    if (hi <= lo) return;
-
-    int mid = lo + (hi-lo) / 2;
-    merge_sort(array, aux, lo, mid);
-    merge_sort(array, aux, mid+1, hi);
-
-    // merge skip (caso ja tenha ordenado)
-    if (!less(array[mid], array[mid+1])) return;
-
-    merge(array, aux, lo, mid, hi);
 }
 
 void sort(Item *a, int lo, int hi) {

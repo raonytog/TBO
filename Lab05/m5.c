@@ -16,15 +16,6 @@ void merge(Item *a, Item *aux, int lo, int mid, int hi) {
     }   
 }
 
-void merge_sort(Item *array, Item *aux, int lo, int hi) {
-    if (hi <= lo) return;
-
-    int mid = lo + (hi-lo) / 2;
-    merge_sort(array, aux, lo, mid);
-    merge_sort(array, aux, mid+1, hi);
-    merge(array, aux, lo, mid, hi);
-}
-
 void sort(Item *a, int lo, int hi) {
     int N = (hi - lo) + 1;
     int y = N - 1;
