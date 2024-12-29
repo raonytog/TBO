@@ -3,6 +3,7 @@
  */
 
 #include "item.h"
+#include <sys/time.h>
 
 void shuffle(Item *a, int N) {
     struct timeval tv; gettimeofday(&tv, NULL);

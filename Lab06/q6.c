@@ -27,6 +27,10 @@ int pop() {
     return stack[top];
 }
 
+int stack_empty() {
+    return top == -1;
+}
+
 int bigger(Item *array, int lo, int hi) {
     if (array[lo] > array[hi]) return lo;
     return hi;
