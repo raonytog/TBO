@@ -6,30 +6,30 @@
 
 #define CUTOFF 10
 
-void insertion_sort(Item *a, int lo, int hi) {
+void insertion_sort(Item *array, int lo, int hi) {
     for (int i = lo + 1; i <= hi; i++) {
-        for (int j = i; j > lo && less(a[j], a[j-1]); j--) {
-            exch(a[j], a[j-1]);
+        for (int j = i; j > lo && less(array[j], array[j-1]); j--) {
+            exch(array[j], array[j-1]);
         }
     }
 }
 
 int partition(Item *array, int lo, int hi) {
     int i = lo, j = hi+1;
-    Item v = array[lo];
+    Item pivot = array[lo];
     while(1) {
         /** Percorre o vetor da esquerda pra direita enquanto 
          * o ponteiro i for menor que o pivot v 
          * 
          * Em outras palavras, ate achar i maior que o pivot*/
-        while (less(array[++i], v))
+        while (less(array[++i], pivot))
             if (i == hi) break;
 
         /** Percorre o vetor da esquerda pra direita enquanto 
          * o ponteiro j for maior que o pivot v 
          * 
          * Em outras palavras, ate achar j menor que o pivot */
-        while (less(v, array[--j]))
+        while (less(pivot, array[--j]))
             if (j == lo) break;
 
         /** Verifica cruzamento */
@@ -51,3 +51,6 @@ void quick_sort(Item *array, int lo, int hi) {
     quick_sort(array, j+1, hi);
 }
 
+void sort(Item *array, int lo, int hi) {
+    quick_sort(array, lo, hi);
+}
