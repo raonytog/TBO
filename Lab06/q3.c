@@ -4,8 +4,18 @@
 
 #include "item.h"
 
+int bigger(Item *array, int lo, int hi) {
+    if (array[lo] > array[hi]) return lo;
+    return hi;
+}
+
 int median(Item *array, int lo, int hi) {
-    return (array[lo] + array[hi] + array[(lo+hi)/2])/3;
+    int mid = (lo+hi)/2;
+
+    int maior = bigger(array, lo, hi);
+    if (maior == lo) return bigger(array, mid, hi);
+    if (maior == hi) return bigger(array, lo, mid);
+    return bigger(array, lo, hi);
 }
 
 int partition(Item *array, int lo, int hi) {
