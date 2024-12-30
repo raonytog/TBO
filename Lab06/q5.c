@@ -16,15 +16,28 @@ void stack_init(int max) {
 }
 
 void push(int item) {
-    top++;
-    stack[top] = item;
+    if (top >= maxSize - 1) {
+        exit(EXIT_FAILURE);
+    }
+
+    stack[++top] = item;
 }
 
-void push2(int a, int b) { push(a); puhs(b); }
+void push2(int a, int b) {
+    push(b);
+    push(a);
+}
 
 int pop() {
-    top--;
-    return stack[top];
+    if (stack_empty()) {
+        exit(EXIT_FAILURE);
+    }
+    return stack[top--];
+}
+
+
+int stack_empty() {
+    return top == -1;
 }
 
 int partition(Item *array, int lo, int hi) {
@@ -55,7 +68,7 @@ int partition(Item *array, int lo, int hi) {
 }
 
 void quick_sort(Item *array, int lo, int hi) {
-    stack_init(hi);
+    stack_init(hi - lo + 1);
     push2(lo, hi);
 
     while(!stack_empty()) {
@@ -76,4 +89,8 @@ void quick_sort(Item *array, int lo, int hi) {
     }
 
     free(stack);
+}
+
+void sort(Item *array, int lo, int hi) {
+    quick_sort(array, lo, hi);
 }

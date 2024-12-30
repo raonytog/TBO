@@ -4,33 +4,6 @@
 
 #include "item.h"
 
-/** Stack */
-int *stack = NULL;
-int maxSize = 0;
-int top = -1;
-
-void stack_init(int max) {
-    stack = malloc(max * sizeof(int));
-    top = -1;
-    maxSize = max;
-}
-
-void push(int item) {
-    top++;
-    stack[top] = item;
-}
-
-void push2(int a, int b) { push(a); puhs(b); }
-
-int pop() {
-    top--;
-    return stack[top];
-}
-
-int stack_empty() {
-    return top == -1;
-}
-
 int bigger(Item *array, int lo, int hi) {
     if (array[lo] > array[hi]) return lo;
     return hi;
@@ -55,9 +28,44 @@ void insertion_sort(Item *array, int lo, int hi) {
     }
 }
 
+/** Stack */
+int *stack = NULL;
+int maxSize = 0;
+int top = -1;
+
+void stack_init(int max) {
+    stack = malloc(max * sizeof(int));
+    top = -1;
+    maxSize = max;
+}
+
+void push(int item) {
+    if (top >= maxSize - 1) {
+        exit(EXIT_FAILURE);
+    }
+
+    stack[++top] = item;
+}
+
+void push2(int a, int b) {
+    push(b);
+    push(a);
+}
+
+int pop() {
+    if (stack_empty()) {
+        exit(EXIT_FAILURE);
+    }
+    return stack[top--];
+}
+
+int stack_empty() {
+    return top == -1;
+}
+
 int partition(Item *array, int lo, int hi) {
     int i = lo, j = hi+1;
-    Item pivot = median(array, lo, hi);
+    Item pivot = array[lo];
     while(1) {
         /** Percorre o vetor da esquerda pra direita enquanto 
          * o ponteiro i for menor que o pivot v 
@@ -83,16 +91,19 @@ int partition(Item *array, int lo, int hi) {
 }
 
 void quick_sort(Item *array, int lo, int hi) {
-    stack_init(hi);
+    stack_init(hi - lo + 1);
     push2(lo, hi);
 
     while(!stack_empty()) {
         lo = pop(); hi = pop();
 
-        if (hi <= lo + CUTOFF -1) {
+        if (hi <= lo + CUTOFF - 1) {
             insertion_sort(array, lo, hi);
-            continue;
+            continue;;
         }
+
+        int mediana = median(array, lo, hi);
+        exch(array[lo], array[mediana]);
 
         int i = partition(array, lo, hi);
 
@@ -107,4 +118,8 @@ void quick_sort(Item *array, int lo, int hi) {
     }
 
     free(stack);
+}
+
+void sort(Item *array, int lo, int hi) {
+    quick_sort(array, lo, hi);
 }

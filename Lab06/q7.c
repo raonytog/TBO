@@ -5,17 +5,27 @@
 #include "item.h"
 #include <sys/time.h>
 
-void shuffle(Item *a, int N) {
+void shuffle(Item *array, int N) {
     struct timeval tv; gettimeofday(&tv, NULL);
     srand48(tv.tv_usec);
     for (int i = N-1; i > 0; i--) {
         int j = (unsigned int) (drand48()*(i+1));
-        exch(a[i], a[j]);
+        exch(array[i], array[j]);
     }
 }
 
+int bigger(Item *array, int lo, int hi) {
+    if (array[lo] > array[hi]) return lo;
+    return hi;
+}
+
 int median(Item *array, int lo, int hi) {
-    return (array[lo] + array[hi] + array[(lo+hi)/2])/3;
+    int mid = (lo+hi)/2;
+
+    int maior = bigger(array, lo, hi);
+    if (maior == lo) return bigger(array, mid, hi);
+    if (maior == hi) return bigger(array, lo, mid);
+    return bigger(array, lo, hi);
 }
 
 #define CUTOFF 10
@@ -30,7 +40,7 @@ void insertion_sort(Item *array, int lo, int hi) {
 
 int partition(Item *array, int lo, int hi) {
     int i = lo, j = hi+1;
-    Item v = median(array, lo, hi);
+    Item v = array[lo];
     while(1) {
         /** Percorre o vetor da esquerda pra direita enquanto 
          * o ponteiro i for menor que o pivot v 
@@ -58,10 +68,19 @@ int partition(Item *array, int lo, int hi) {
 void quick_sort(Item *array, int lo, int hi) {
     if (hi <= lo + CUTOFF - 1) {
         insertion_sort(array, lo, hi);
+        return;
     }
 
+    int mediana = median(array, lo, hi);
+    exch(array[lo], array[mediana]);
+    
     int j = partition(array, lo, hi);
     quick_sort(array, lo, j-1);
     quick_sort(array, j+1, hi);
+}
+
+void sort(Item *array, int lo, int hi) {
+    shuffle(array, hi-lo+1);
+    quick_sort(array, lo, hi);
 }
 

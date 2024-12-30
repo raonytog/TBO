@@ -1,7 +1,21 @@
-#  path = "input/nearly_sorted/1000000.txt"
-#  path = "input/reverse_sorted/1000000.txt"
-#  path = "input/sorted/1000000.txt"
-  path = "input/unif_rand/1000000.txt"
+ path = "in/few_uniq/10M_const_keys_sorted.txt"
+# path = "in/few_uniq/10M_const_keys_unif_rand.txt"
+
+# path = "in/nearly_sorted/100000.txt"
+# path = "in/nearly_sorted/1000000.txt"
+# path = "in/nearly_sorted/10000000.txt"
+
+# path = "in/reverse_sorted/100000.txt"
+# path = "in/reverse_sorted/1000000.txt"
+# path = "in/reverse_sorted/10000000.txt"
+
+# path = "in/sorted/100000.txt"
+# path = "in/sorted/1000000.txt"
+# path = "in/sorted/10000000.txt"
+
+# path = "in/unif_rand/100000.txt"
+# path = "in/unif_rand/1000000.txt"
+# path = "in/unif_rand/10000000.txt"
 
 q1:
 	clear
@@ -43,7 +57,12 @@ q8:
 	gcc client.c q8.c -o q8.ray
 	./q8.ray $(path)
 
+q9:
+	clear
+	gcc client.c q9.c -o q9.ray
+	./q9.ray $(path)
+
 # clean
 clean:
 	clear
-	rq -f *.o *.ray 
+	rm -f *.ray 

@@ -39,13 +39,16 @@ Item* CreateItem(char const *path, int *hi) {
     if (!fInput) { printf("Error while opening fInput!"); exit(EXIT_FAILURE); }
 
     int size = 1, i = 0;   char c = path[0];
-    /** Findind array max size and keep it in 'hi' */
-    while (c != '1') { i++; c = path[i];}
-    i++; c = path[i];
-    while (c != 'K') { i++; size *= 10; c = path[i]; }
-    *hi = size;
 
-    /** Filling array */
+    /** find array max size and stor it in 'hi' */
+    while (c != '1') { i++; c = path[i]; }
+    i++; c = path[i];
+    while (c != 'M' && c != '.') { i++; size *= 10; c = path[i]; }
+
+    if (c == '.') *hi = size;
+    else *hi = size * M;
+
+    /** fill array */
     Item *array = malloc((*hi) * sizeof(int));
     for (int i = 0; i < *hi; i++) { fscanf(fInput, "%d", &array[i]); }
     fclose(fInput);

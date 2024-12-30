@@ -30,7 +30,7 @@ void insertion_sort(Item *array, int lo, int hi) {
 
 int partition(Item *array, int lo, int hi) {
     int i = lo, j = hi+1;
-    Item pivot = median(array, lo, hi);
+    Item pivot = array[lo];
     while(1) {
         /** Percorre o vetor da esquerda pra direita enquanto 
          * o ponteiro i for menor que o pivot v 
@@ -58,8 +58,12 @@ int partition(Item *array, int lo, int hi) {
 void quick_sort(Item *array, int lo, int hi) {
     if (hi <= lo + CUTOFF - 1) {
         insertion_sort(array, lo, hi);
+        return;
     }
 
+    int mediana = median(array, lo, hi);
+    exch(array[lo], array[mediana]);
+    
     int j = partition(array, lo, hi);
     quick_sort(array, lo, j-1);
     quick_sort(array, j+1, hi);

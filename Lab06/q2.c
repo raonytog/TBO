@@ -44,6 +44,7 @@ int partition(Item *array, int lo, int hi) {
 void quick_sort(Item *array, int lo, int hi) {
     if (hi <= lo + CUTOFF - 1) {
         insertion_sort(array, lo, hi);
+        return;
     }
 
     int j = partition(array, lo, hi);
