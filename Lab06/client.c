@@ -27,7 +27,7 @@ int main(int argc, char const *argv[]) {
     double time = GetTimeToSort(itens, 0, hi);
     PrintItem(itens, hi);
 
-    printf("\n\nTime spent: %lf\n", time);
+    printf("\n\nTime spent: %.4lf\n", time);
     DestroyItem(itens);
     return 0;
 }
