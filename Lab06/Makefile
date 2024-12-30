@@ -15,7 +15,7 @@
 
 # path = "in/unif_rand/100000.txt"
 # path = "in/unif_rand/1000000.txt"
-# path = "in/unif_rand/10000000.txt"
+ path = "in/unif_rand/10000000.txt"
 
 q1:
 	clear
