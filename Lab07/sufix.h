@@ -9,6 +9,12 @@ Sufix *createSufix(String *s, int idx);
 
 Sufix **createArraySufix(int size);
 
+Sufix **fillSufixArray(int size, String *string);
+
+
+char char_at(Sufix *sfx, int i);
+
+
 void printSufix(Sufix *sfx);
 
 void printArraySufix(Sufix **sfx, int size);
@@ -17,7 +23,7 @@ void destroySufix(Sufix *sfx);
 
 void destroArraySufix(Sufix **sfx, int size);
 
-Sufix **fillSufixArray(int size, String *string);
+
 
 int sufixCompare(const void *r, const void *s);
 

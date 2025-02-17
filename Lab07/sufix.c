@@ -20,6 +20,20 @@ Sufix **createArraySufix(int size) {
     return new;
 }
 
+Sufix **fillSufixArray(int size, String *string) {
+    Sufix **sfx = createArraySufix(size);
+    
+    for(int i = 0; i < size; i++) {
+        sfx[i] = createSufix(string, i);
+    }
+
+    return sfx;
+}
+
+char char_at(Sufix *sfx, int i) {
+    return sfx->idx < i ? sfx->str->c[i] : -1;
+}
+
 void printSufix(Sufix *sfx) {
     print_substring(sfx->str, sfx->idx, sfx->str->len);
 }
@@ -41,16 +55,6 @@ void destroArraySufix(Sufix **sfx, int size) {
         destroySufix(sfx[i]);
     }
     free(sfx);
-}
-
-Sufix **fillSufixArray(int size, String *string) {
-    Sufix **sfx = createArraySufix(size);
-    
-    for(int i = 0; i < size; i++) {
-        sfx[i] = createSufix(string, i);
-    }
-
-    return sfx;
 }
 
 int sufixCompare(const void *r, const void *s) {

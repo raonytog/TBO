@@ -5,9 +5,10 @@
 #include "sufix.h"
 
 String* readStringFromFile(FILE *input, int *size);
+extern void sort(Sufix **array, int N);
 
 int main() {
-    FILE *input = fopen("in/moby.txt", "r");
+    FILE *input = fopen("in/abra.txt", "r");
     if (!input) { printf("Error with file!\n"); exit(EXIT_FAILURE); }
 
     int size = 0;
@@ -15,15 +16,24 @@ int main() {
     String *str = readStringFromFile(input, &size);
     Sufix **arraySufix = fillSufixArray(size, str);
 
-    /** Ordenacao com qsort */
-    qsort(arraySufix, size, sizeof(String*), sufixCompare);
+    /** Pre ordenar */
+    printf("Array de sufixos desordenados:\n");
     printArraySufix(arraySufix, size);
 
+    /** Ordenacao com qsort */
+    // printf("\nArray de sufixos ordenado com qsort:\n");
+    // qsort(arraySufix, size, sizeof(String*), sufixCompare);
+    // printArraySufix(arraySufix, size);
+
     /** Ordenacao com msd raxis sort */
-    /** a fazer zzz */
+    printf("\nArray de sufixos ordenado com radix sort:\n");
+    sort(arraySufix, size);
+    printArraySufix(arraySufix, size);
+
     destroArraySufix(arraySufix, size);
     destroy_string(str);
     fclose(input);
+
     return 0;
 }
 
