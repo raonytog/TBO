@@ -9,6 +9,8 @@ struct Sufix {
 };
 
 Sufix *createSufix(String *s, int idx) {
+    if(!s || idx < 0) return NULL;
+
     Sufix *new = malloc(sizeof(Sufix));
     new->str = s;
     new->idx = idx;
@@ -16,12 +18,18 @@ Sufix *createSufix(String *s, int idx) {
 }
 
 Sufix **createArraySufix(int size) {
+    if (size <= 0) return NULL;
+
     Sufix **new = malloc(size * sizeof(Sufix*));
+    if (!new) return NULL;
     return new;
 }
 
 Sufix **fillSufixArray(int size, String *string) {
+    if (!string || size <= 0) return NULL;
+    
     Sufix **sfx = createArraySufix(size);
+    if (!sfx) return NULL;
     
     for(int i = 0; i < size; i++) {
         sfx[i] = createSufix(string, i);
@@ -30,27 +38,42 @@ Sufix **fillSufixArray(int size, String *string) {
     return sfx;
 }
 
+String *getStringSufix(Sufix *sfx) {
+    if (!sfx) return NULL;
+    return sfx->str;
+}
+
+int getIdxSufix(Sufix *sfx) {
+    if (!sfx) return -1;
+    return sfx->idx;
+}
+
 char char_at(Sufix *sfx, int i) {
+    if (!sfx || i < 0) return -1;
     return sfx->idx < i ? sfx->str->c[i] : -1;
 }
 
 void printSufix(Sufix *sfx) {
+    if (!sfx) return;
     print_substring(sfx->str, sfx->idx, sfx->str->len);
 }
 
 void printArraySufix(Sufix **sfx, int size) {
+    if (!sfx || size <= 0) return;
     for(int i = 0; i < size; i++) {
         printSufix(sfx[i]);
-        printf("\n");
     }
+    printf("\n");
 }
 
 /** Nao libera memoria da string */
 void destroySufix(Sufix *sfx) {
+    if (!sfx) return;
     free(sfx);
 }
 
 void destroArraySufix(Sufix **sfx, int size) {
+    if (!sfx || size <= 0) return;
     for(int i = 0; i < size; i++) {
         destroySufix(sfx[i]);
     }
@@ -58,6 +81,8 @@ void destroArraySufix(Sufix **sfx, int size) {
 }
 
 int sufixCompare(const void *r, const void *s) {
+    if (!r || !s) return 0;
+
     Sufix *a = *(Sufix**)r;
     Sufix *b = *(Sufix**)s;
 

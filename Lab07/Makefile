@@ -1,6 +1,6 @@
 all:
 	make comp
-	bin/prog
+	@ bin/prog
 
 comp:
 	clear
