@@ -25,6 +25,16 @@ Sufix **createArraySufix(int size) {
     return new;
 }
 
+Sufix **copyArraySufix(Sufix **sfx, int size) {
+    Sufix **new = malloc(size * sizeof(Sufix*));
+    
+    for(int i = 0; i < size; i++) {
+        new[i] = createSufix(sfx[i]->str, sfx[i]->idx);
+    }
+
+    return new;
+}
+
 Sufix **fillSufixArray(int size, String *string) {
     if (!string || size <= 0) return NULL;
     

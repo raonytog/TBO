@@ -1,33 +1,37 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include <time.h>
 
 #include "str.h"
 #include "sufix.h"
 
 String* readStringFromFile(FILE *input, int *size);
-void doQuery(Sufix **array, int size);
+void doQuery(Sufix **array, int size, int context);
 extern void sort(Sufix **array, int N);
 void qSortPrintf(Sufix **sfx, int size);
 void radixSortPrintf(Sufix **sfx, int size);
 
-int main() {
-    FILE *input = fopen("in/moby.txt", "r");
-    if (!input) { printf("Error with file!\n"); exit(EXIT_FAILURE); }
+int main(int argc, char const *argv[]) {
+    if (argc <= 1) return 0;
+
+    FILE *input = fopen(argv[1], "r");
+    if (!input) { printf("Error with file!\n"); }
 
     int size = 0;
 
     String *str = readStringFromFile(input, &size);
     Sufix **sfx = fillSufixArray(size, str);
-
-    /** Pre ordenar */
-    // printf("Array de sufixos desordenados:\n");
-    // printArraySufix(sfx, size);
-    // doQuery(sfx, size);
-    radixSortPrintf(sfx, size);
+    Sufix **sfxCopy = copyArraySufix(sfx, size);
     qSortPrintf(sfx, size);
+    // radixSortPrintf(sfxCopy, size);
+
+    // printArraySufix(sfx, size);
+    int context = atoi(argv[2]);
+    doQuery(sfx, size, context);
 
     destroArraySufix(sfx, size);
+    destroArraySufix(sfxCopy, size);
     destroy_string(str);
     fclose(input);
 
@@ -66,18 +70,23 @@ String* readStringFromFile(FILE *input, int *size) {
     return new;
 }
 
-void doQuery(Sufix **array, int size) {
+void doQuery(Sufix **array, int size, int context) {
+    if (!array || size <= 0) return;
+
     char queryString[100];
-    int context = 15;
 
     printf("\nEtapa de query!\n");
     printf("Digite uma chave de pesquisa: ");
     while( scanf("%[^\n]%*c", queryString) == 1 ) {
         String *query = create_string(queryString);
+        if (!query) { printf("Falha ao ler query!\n"); continue; }
 
         for(int i = 0; i < size; i++) {
+            if (!array[i]) continue;
+
             String *aux = getStringSufix(array[i]);
             int idx = getIdxSufix(array[i]);
+            if (!aux || idx < 0 || idx >= aux->len) continue;
 
             if (equals_substring(aux, idx, 0, query)) {
                 int start = idx - context;
@@ -91,7 +100,7 @@ void doQuery(Sufix **array, int size) {
         }
 
         destroy_string(query);
-        printf("Digite uma chave de pesquisa: ");
+        printf("\nDigite uma chave de pesquisa: ");
     }
 }
 

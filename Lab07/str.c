@@ -76,7 +76,12 @@ void print_str_array(String* *a, int N) {
 }
 
 bool equals_substring(String *text, int from, int to, String *query) {
-    //if (query->len < (to - from + 1)) { return false; }
+    // if (query->len < (to - from + 1)) { return false; }
+    if(!text || !query || from < 0 || to < 0) {
+        printf("Error on equals_substring!\n");
+        return false;
+    }
+
     for (int i = 0; i < query->len; i++) {
         if(query->c[i] != text->c[from + i]) { return false; }
     }

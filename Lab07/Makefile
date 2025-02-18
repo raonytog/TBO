@@ -1,6 +1,14 @@
+abra = "in/abra.txt"
+tale = "in/tale.txt"
+moby = "in/moby.txt"
+
+path = $(tale)
+context = 15
+
+
 all:
 	make comp
-	@ bin/prog
+	bin/prog $(path) $(context)
 
 comp:
 	clear
@@ -8,4 +16,4 @@ comp:
 
 val:
 	make comp
-	valgrind bin/prog
+	valgrind bin/prog $(path) $(context)

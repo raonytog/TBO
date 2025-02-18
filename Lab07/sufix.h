@@ -8,6 +8,7 @@ typedef struct Sufix Sufix;
 Sufix *createSufix(String *s, int idx);
 Sufix **createArraySufix(int size);
 Sufix **fillSufixArray(int size, String *string);
+Sufix **copyArraySufix(Sufix **sfx, int size);
 
 String *getStringSufix(Sufix *sfx);
 int getIdxSufix(Sufix *sfx);
