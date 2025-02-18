@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <time.h>
 
 #include "str.h"
 #include "sufix.h"
@@ -7,6 +8,8 @@
 String* readStringFromFile(FILE *input, int *size);
 void doQuery(Sufix **array, int size);
 extern void sort(Sufix **array, int N);
+void qSortPrintf(Sufix **sfx, int size);
+void radixSortPrintf(Sufix **sfx, int size);
 
 int main() {
     FILE *input = fopen("in/moby.txt", "r");
@@ -15,25 +18,16 @@ int main() {
     int size = 0;
 
     String *str = readStringFromFile(input, &size);
-    Sufix **arraySufix = fillSufixArray(size, str);
+    Sufix **sfx = fillSufixArray(size, str);
 
     /** Pre ordenar */
     // printf("Array de sufixos desordenados:\n");
-    // printArraySufix(arraySufix, size);
+    // printArraySufix(sfx, size);
+    // doQuery(sfx, size);
+    radixSortPrintf(sfx, size);
+    qSortPrintf(sfx, size);
 
-    /** Ordenacao com qsort */
-    // printf("\nArray de sufixos ordenado com qsort:\n");
-    qsort(arraySufix, size, sizeof(Sufix*), sufixCompare);
-    // printArraySufix(arraySufix, size);
-
-    printf("\nEtapa de query!\n");
-    doQuery(arraySufix, size);
-    /** Ordenacao com msd raxis sort */
-    // printf("\nArray de sufixos ordenado com radix sort:\n");
-    // sort(arraySufix, size);
-    // printArraySufix(arraySufix, size);
-
-    destroArraySufix(arraySufix, size);
+    destroArraySufix(sfx, size);
     destroy_string(str);
     fclose(input);
 
@@ -75,6 +69,8 @@ String* readStringFromFile(FILE *input, int *size) {
 void doQuery(Sufix **array, int size) {
     char queryString[100];
     int context = 15;
+
+    printf("\nEtapa de query!\n");
     printf("Digite uma chave de pesquisa: ");
     while( scanf("%[^\n]%*c", queryString) == 1 ) {
         String *query = create_string(queryString);
@@ -97,4 +93,22 @@ void doQuery(Sufix **array, int size) {
         destroy_string(query);
         printf("Digite uma chave de pesquisa: ");
     }
+}
+
+void qSortPrintf(Sufix **sfx, int size) {
+    clock_t start = clock();
+    printf("\nArray de sufixos ordenado com qsort:\n");
+    qsort(sfx, size, sizeof(Sufix*), sufixCompare);
+    // printArraySufix(sfx, size);
+    clock_t end = clock();
+    printf("qsort time spent: %f\n", ((double)end - (double)start)/CLOCKS_PER_SEC);
+}
+
+void radixSortPrintf(Sufix **sfx, int size) {
+    clock_t start = clock();
+    printf("\nArray de sufixos ordenado com radix sort:\n");
+    sort(sfx, size);
+    // printArraySufix(sfx, size);
+    clock_t end = clock();
+    printf("radix sort time spent: %f\n", ((double)end - (double)start)/CLOCKS_PER_SEC);
 }

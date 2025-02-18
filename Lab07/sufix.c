@@ -49,9 +49,10 @@ int getIdxSufix(Sufix *sfx) {
 }
 
 char char_at(Sufix *sfx, int i) {
-    if (!sfx || i < 0) return -1;
-    return sfx->idx < i ? sfx->str->c[i] : -1;
+    if (!sfx || i < 0 || i >= sfx->str->len - sfx->idx) return -1;
+    return sfx->str->c[sfx->idx + i];
 }
+
 
 void printSufix(Sufix *sfx) {
     if (!sfx) return;
