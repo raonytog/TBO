@@ -60,24 +60,27 @@ void count_sort(Sufix **array, Sufix **aux, int *count,
     }
 }
 
-void rec_MSD(Sufix **array, Sufix **aux, int lo, int hi, int d) {
-    if (hi <= lo) return;
-
-    int* count = create_count_array();
+void rec_MSD(Sufix **array, Sufix **aux, int *count, int lo, int hi, int d) {
+    if (hi <= lo + CUTOFF) {
+        insertion_sort(array, lo, hi);
+        return;
+    }
 
     // Key-indexed count.
+    clear_count_array(count);
     count_sort(array, aux, count, lo, hi, d);
 
     // Sort R arrays recursively.
     for (int r = 1; r < R+1; r++) {
-        rec_MSD(array, aux, lo+count[r], lo+count[r+1]-1, d+1);
+        rec_MSD(array, aux, count, lo+count[r], lo+count[r+1]-1, d+1);
     }
-
-    free(count);
 }
 
 void sort(Sufix **array, int N) {
     Sufix **aux = createArraySufix(N);
-    rec_MSD(array, aux, 0, N-1, 0);
+    int* count = create_count_array();
+
+    rec_MSD(array, aux, count, 0, N-1, 0);
     free(aux);
+    free(count);
 }

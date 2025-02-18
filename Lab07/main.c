@@ -23,7 +23,7 @@ int main(int argc, char const *argv[]) {
     String *str = readStringFromFile(input, &size);
     Sufix **sfx = fillSufixArray(size, str);
     Sufix **sfxCopy = copyArraySufix(sfx, size);
-    qSortPrintf(sfx, size);
+    // qSortPrintf(sfx, size);
     // radixSortPrintf(sfxCopy, size);
 
     // printArraySufix(sfx, size);
