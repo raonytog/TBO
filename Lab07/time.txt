@@ -1,0 +1,5 @@
+comparision with time in seconds 
+            qsort       radix_sort
+abra        0.000007    0.000013
+moby        1.320546    1.018132
+tale        0.695427    0.537442

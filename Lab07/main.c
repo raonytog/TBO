@@ -110,7 +110,7 @@ void doQuery(Sufix **array, int size, int context) {
 }
 
 void binarySearch(Sufix **array, int lo, int hi, int max, String *query, int *newLo, int *newHi) {
-    if (!array || !query || (lo > hi)) return;
+    if (!array || !query || (lo >= hi)) return;
 
     int mid = lo + (hi - lo)/2;
     Sufix *r = array[mid], 

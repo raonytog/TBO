@@ -3,7 +3,7 @@ tale = "in/tale.txt"
 moby = "in/moby.txt"
 teste = "in/teste.txt"
 
-path = $(tale)
+path = $(moby)
 context = 15
 
 
