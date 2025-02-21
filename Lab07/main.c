@@ -93,16 +93,16 @@ void doQuery(Sufix **array, int size, int context) {
             
         } else {
             for(int i = lo; i < hi; i++) {
-            String *s = getStringSufix(array[i]);
-            int start = getIdxSufix(array[i]) - context;
-            if (start< 0) start = 0;
+                String *s = getStringSufix(array[i]);
+                int start = getIdxSufix(array[i]) - context;
+                if (start< 0) start = 0;
 
-            int end = getIdxSufix(array[i])  + query->len + context;
-            if (end > size) end = size;
+                int end = getIdxSufix(array[i])  + query->len + context;
+                if (end > size) end = size;
 
-            print_substring(s, start, end);
+                print_substring(s, start, end);
+            }
         }
-    }
 
         destroy_string(query);
         printf("\nDigite uma chave de pesquisa: ");
