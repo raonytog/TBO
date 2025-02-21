@@ -53,6 +53,11 @@ String *getStringSufix(Sufix *sfx) {
     return sfx->str;
 }
 
+int getLenSufix(Sufix *sfx) {
+    if (!sfx) return 0;
+    return sfx->str->len;
+}
+
 int getIdxSufix(Sufix *sfx) {
     if (!sfx) return -1;
     return sfx->idx;
@@ -111,4 +116,20 @@ int sufixCompare(const void *r, const void *s) {
     }
 
     return sizeA - sizeB;
+}
+
+int sfxCmp(Sufix *a, Sufix *b) {
+    int sizeA = a->str->len - a->idx;
+    int sizeB = b->str->len - b->idx;
+    int min = sizeA < sizeB ? sizeA : sizeB;
+
+    for(int count = 0, i = a->idx, j = b->idx; 
+            count < min; 
+            count++, i++, j++) {
+        
+        if(a->str->c[i] < b->str->c[j]) return -1;
+        if(a->str->c[i] > b->str->c[j]) return 1;
+    }
+
+    return 0;
 }

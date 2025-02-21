@@ -34,8 +34,7 @@ void clear_count_array(int *count) {
     }
 }
 
-void count_sort(Sufix **array, Sufix **aux, int *count,
-    int lo, int hi, int d) {
+void count_sort(Sufix **array, Sufix **aux, int *count, int lo, int hi, int d) {
     
     clear_count_array(count);
     // Count frequencies

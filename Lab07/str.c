@@ -36,9 +36,9 @@ void print_string(String *s) {
 }
 
 // Compara as duas Strings dadas. Retorna:
-// -1 se s < t
-//  1 se s > t
-//  0 se s == t
+// -1 se s < t      --- s menor q t
+//  1 se s > t      --- s maior q t
+//  0 se s == t     --- s igual a t
 int compare(String *s, String *t) {
     return compare_from(s, t, 0);
 }
@@ -89,6 +89,9 @@ bool equals_substring(String *text, int from, int to, String *query) {
 }
 
 void print_substring(String *s, int from, int to) {
+    if (from < 0) from = 0;
+    if (to > s->len) to = s->len;
+    
     for (int i = from; i < to; i++) {
         printf("%c", s->c[i]);
     }

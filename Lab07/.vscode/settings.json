@@ -5,6 +5,8 @@
         "initializer_list": "c",
         "utility": "c",
         "random": "c",
-        "sufix.h": "c"
+        "sufix.h": "c",
+        "stdio.h": "c",
+        "stdlib.h": "c"
     }
 }

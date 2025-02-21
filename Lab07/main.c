@@ -7,6 +7,7 @@
 #include "sufix.h"
 
 String* readStringFromFile(FILE *input, int *size);
+void binarySearch(Sufix **array, int lo, int hi, int max, String *query, int *newLo, int *newHi);
 void doQuery(Sufix **array, int size, int context);
 extern void sort(Sufix **array, int N);
 void qSortPrintf(Sufix **sfx, int size);
@@ -16,6 +17,7 @@ int main(int argc, char const *argv[]) {
     if (argc <= 1) return 0;
 
     FILE *input = fopen(argv[1], "r");
+    // FILE *input = fopen("in/tale.txt", "r");
     if (!input) { printf("Error with file!\n"); }
 
     int size = 0;
@@ -23,12 +25,14 @@ int main(int argc, char const *argv[]) {
     String *str = readStringFromFile(input, &size);
     Sufix **sfx = fillSufixArray(size, str);
     Sufix **sfxCopy = copyArraySufix(sfx, size);
-    // qSortPrintf(sfx, size);
-    // radixSortPrintf(sfxCopy, size);
+
+    radixSortPrintf(sfxCopy, getLenSufix(sfxCopy[0]));
+    qSortPrintf(sfx, getLenSufix(sfx[0]));
 
     // printArraySufix(sfx, size);
     int context = atoi(argv[2]);
-    doQuery(sfx, size, context);
+    // int context = 15;
+    doQuery(sfx, getLenSufix(sfx[0]), context);
 
     destroArraySufix(sfx, size);
     destroArraySufix(sfxCopy, size);
@@ -77,31 +81,59 @@ void doQuery(Sufix **array, int size, int context) {
 
     printf("\nEtapa de query!\n");
     printf("Digite uma chave de pesquisa: ");
+
+    int lo = 0, hi = 1;
     while( scanf("%[^\n]%*c", queryString) == 1 ) {
         String *query = create_string(queryString);
         if (!query) { printf("Falha ao ler query!\n"); continue; }
 
-        for(int i = 0; i < size; i++) {
-            if (!array[i]) continue;
+        binarySearch(array, 0, size, size, query, &lo, &hi);
 
-            String *aux = getStringSufix(array[i]);
-            int idx = getIdxSufix(array[i]);
-            if (!aux || idx < 0 || idx >= aux->len) continue;
+        for(int i = lo; i < hi; i++) {
+            String *s = getStringSufix(array[i]);
+            int start = getIdxSufix(array[i]) - context;
+            if (start< 0) start = 0;
 
-            if (equals_substring(aux, idx, 0, query)) {
-                int start = idx - context;
-                if (start < 0) start = 0;
-                
-                int end = idx + query->len + context;
-                if (end > size) end = size;
-                
-                print_substring(aux, start, end);
-            }
+            int end = getIdxSufix(array[i])  + query->len + context;
+            if (end > size) end = size;
+
+            print_substring(s, start, end);
         }
 
         destroy_string(query);
         printf("\nDigite uma chave de pesquisa: ");
     }
+}
+
+void binarySearch(Sufix **array, int lo, int hi, int max, String *query, int *newLo, int *newHi) {
+    if (!array || !query || (lo > hi)) return;
+
+    int mid = lo + (hi - lo)/2;
+    Sufix *r = array[mid], 
+          *s = createSufix(query, 0);
+    int cmp = sfxCmp(r, s);
+    destroySufix(s);
+
+    if (cmp < 0) { binarySearch(array, mid+1, hi, max, query, newLo, newHi); }
+    else if (cmp > 0) { binarySearch(array, lo, mid-1, max ,query, newLo, newHi); }
+    else {
+        int i = 0, j = 0, idx = 0;
+        for(i = mid-1; i >= 0; i--) {
+            String *t = getStringSufix(array[i]);
+            idx = getIdxSufix(array[i]);
+            if (equals_substring(t, idx, 0, query) == false) 
+                break;
+        }
+        *newLo = i+1;
+        
+        for(j = *newLo; j < max; j++) {
+            String *t = getStringSufix(array[j]);
+            idx = getIdxSufix(array[j]);
+            if (equals_substring(t, idx, 0, query) == false) 
+                break;
+        }
+        *newHi = j;
+    } 
 }
 
 void qSortPrintf(Sufix **sfx, int size) {

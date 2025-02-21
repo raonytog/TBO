@@ -23,9 +23,9 @@ void destroy_string(String *s);
 void print_string(String *s);
 
 // Compara as duas Strings dadas. Retorna:
-// -1 se s < t
-//  1 se s > t
-//  0 se s == t
+// -1 se s < t      --- s menor q t
+//  1 se s > t      --- s maior q t
+//  0 se s == t     --- s igual a t
 int compare(String *s, String *t);
 
 // Realiza a comparação das duas Strings dadas a partir do caractere 'd'.
