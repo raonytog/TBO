@@ -14,10 +14,10 @@ void qSortPrintf(Sufix **sfx, int size);
 void radixSortPrintf(Sufix **sfx, int size);
 
 int main(int argc, char const *argv[]) {
-    if (argc <= 1) return 0;
+    // if (argc <= 1) return 0;
 
-    FILE *input = fopen(argv[1], "r");
-    // FILE *input = fopen("in/tale.txt", "r");
+    // FILE *input = fopen(argv[1], "r");
+    FILE *input = fopen("in/abra.txt", "r");
     if (!input) { printf("Error with file!\n"); }
 
     int size = 0;
@@ -29,10 +29,10 @@ int main(int argc, char const *argv[]) {
     radixSortPrintf(sfxCopy, getLenSufix(sfxCopy[0]));
     qSortPrintf(sfx, getLenSufix(sfx[0]));
 
-    // printArraySufix(sfx, size);
-    int context = atoi(argv[2]);
+    // printArraySufix(sfxCopy, size);
+    // int context = atoi(argv[2]);
     // int context = 15;
-    doQuery(sfx, getLenSufix(sfx[0]), context);
+    // doQuery(sfx, getLenSufix(sfx[0]), context);
 
     destroArraySufix(sfx, size);
     destroArraySufix(sfxCopy, size);
@@ -149,7 +149,7 @@ void radixSortPrintf(Sufix **sfx, int size) {
     clock_t start = clock();
     printf("\nArray de sufixos ordenado com radix sort:\n");
     sort(sfx, size);
-    // printArraySufix(sfx, size);
+    printArraySufix(sfx, size);
     clock_t end = clock();
     printf("radix sort time spent: %f\n", ((double)end - (double)start)/CLOCKS_PER_SEC);
 }

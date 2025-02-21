@@ -1,8 +1,9 @@
 abra = "in/abra.txt"
 tale = "in/tale.txt"
 moby = "in/moby.txt"
+teste = "in/teste.txt"
 
-path = $(tale)
+path = $(teste)
 context = 15
 
 
