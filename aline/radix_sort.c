@@ -1,23 +1,23 @@
 #include <stdlib.h>
 
-#include "sufix.h"
+#include "suffix.h"
 
 #define CUTOFF 10
 #define R 256
 
-static void exch(Sufix **a, int i, int j) {
-    Sufix *aux = a[i];
+static void exch(Suffix **a, int i, int j) {
+    Suffix *aux = a[i];
     a[i] = a[j];
     a[j] = aux;
 }
 
-static int less(Sufix *a, Sufix *b, int d) {
-    return sfxCmp(a,b) < 0;
+static int less(Suffix *a, Suffix *b) {
+    return compare(getStringSuffix(a), getStringSuffix(b)) < 0;
 }
 
-void insertion_sort(Sufix **a, int lo, int hi, int d) {
+void insertion_sort(Suffix **a, int lo, int hi) {
     for (int i = lo + 1; i <= hi; i++) {
-        for (int j = i; j > lo && less(a[j], a[j-1], d); j--) {
+        for (int j = i; j > lo && less(a[j], a[j-1]); j--) {
             exch(a, j, j-1);
         }
     }
@@ -34,7 +34,7 @@ void clear_count_array(int *count) {
     }
 }
 
-void count_sort(Sufix **array, Sufix **aux, int *count,
+void count_sort(Suffix **array, Suffix **aux, int *count,
     int lo, int hi, int d) {
     
     clear_count_array(count);
@@ -60,11 +60,8 @@ void count_sort(Sufix **array, Sufix **aux, int *count,
     }
 }
 
-void rec_MSD(Sufix **array, Sufix **aux, int lo, int hi, int d) {
-    if (hi <= lo + CUTOFF -1) {
-        insertion_sort(array, lo, hi, d);
-        return;
-    }
+void rec_MSD(Suffix **array, Suffix **aux, int lo, int hi, int d) {
+    if (hi <= lo) return;
 
     int* count = create_count_array();
 
@@ -79,8 +76,8 @@ void rec_MSD(Sufix **array, Sufix **aux, int lo, int hi, int d) {
     free(count);
 }
 
-void sort(Sufix **array, int N) {
-    Sufix **aux = createArraySufix(N);
+void sort(Suffix **array, int N) {
+    Suffix **aux = create_suf_array(N);
     rec_MSD(array, aux, 0, N-1, 0);
     free(aux);
 }

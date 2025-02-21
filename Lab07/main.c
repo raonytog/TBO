@@ -14,10 +14,10 @@ void qSortPrintf(Sufix **sfx, int size);
 void radixSortPrintf(Sufix **sfx, int size);
 
 int main(int argc, char const *argv[]) {
-    // if (argc <= 1) return 0;
+    if (argc <= 1) return 0;
 
-    // FILE *input = fopen(argv[1], "r");
-    FILE *input = fopen("in/abra.txt", "r");
+    FILE *input = fopen(argv[1], "r");
+    // FILE *input = fopen("in/abra.txt", "r");
     if (!input) { printf("Error with file!\n"); }
 
     int size = 0;
@@ -30,9 +30,9 @@ int main(int argc, char const *argv[]) {
     qSortPrintf(sfx, getLenSufix(sfx[0]));
 
     // printArraySufix(sfxCopy, size);
-    // int context = atoi(argv[2]);
+    int context = atoi(argv[2]);
     // int context = 15;
-    // doQuery(sfx, getLenSufix(sfx[0]), context);
+    doQuery(sfx, getLenSufix(sfx[0]), context);
 
     destroArraySufix(sfx, size);
     destroArraySufix(sfxCopy, size);
@@ -82,14 +82,17 @@ void doQuery(Sufix **array, int size, int context) {
     printf("\nEtapa de query!\n");
     printf("Digite uma chave de pesquisa: ");
 
-    int lo = 0, hi = 1;
+    int lo = -1, hi = -1;
     while( scanf("%[^\n]%*c", queryString) == 1 ) {
         String *query = create_string(queryString);
         if (!query) { printf("Falha ao ler query!\n"); continue; }
 
         binarySearch(array, 0, size, size, query, &lo, &hi);
-
-        for(int i = lo; i < hi; i++) {
+        if (lo == -1 || hi == -1) {
+            printf("Nao ha correspondencia para a chave!\n");
+            
+        } else {
+            for(int i = lo; i < hi; i++) {
             String *s = getStringSufix(array[i]);
             int start = getIdxSufix(array[i]) - context;
             if (start< 0) start = 0;
@@ -99,6 +102,7 @@ void doQuery(Sufix **array, int size, int context) {
 
             print_substring(s, start, end);
         }
+    }
 
         destroy_string(query);
         printf("\nDigite uma chave de pesquisa: ");
@@ -149,7 +153,7 @@ void radixSortPrintf(Sufix **sfx, int size) {
     clock_t start = clock();
     printf("\nArray de sufixos ordenado com radix sort:\n");
     sort(sfx, size);
-    printArraySufix(sfx, size);
+    // printArraySufix(sfx, size);
     clock_t end = clock();
     printf("radix sort time spent: %f\n", ((double)end - (double)start)/CLOCKS_PER_SEC);
 }
