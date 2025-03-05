@@ -17,16 +17,8 @@ int main() {
         int value = rand();
         root = insertRootBst(root, value);
         final = insertFinalBst(final, value);
-        partition = insertRootPartitionBst(partition, value, value);
+        partition = insertRootPartitionBst(partition, value, sizeBst(partition));
     }
-
-    // printf("Root:\n");
-    // rec_preorder(root, printBstContent);
-    // printf("\n\n");
-
-    // printf("Final:\n");
-    // rec_preorder(final, printBstContent);
-    // printf("\n");
 
     printf("Altura da arvore inserida pela raiz: %d\n", hightBst(root));
     printf("Altura da arvore inserida pelo final: %d\n", hightBst(final));

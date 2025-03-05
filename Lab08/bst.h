@@ -25,6 +25,8 @@ void destroyBst(Bst *tree);
 
 int hightBst(Bst *tree);
 
+int sizeBst(Bst *tree);
+
 void printBstContent(Bst *tree);
 
 /** Recursion */

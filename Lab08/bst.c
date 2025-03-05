@@ -63,20 +63,20 @@ Bst *insertRootBst(Bst *tree, int key) {
 Bst *insertRootPartitionBst(Bst *tree, int key, int k) {
     if (!tree) return initBst(key);
 
-    int t = hightBst(tree->left);
-    
+    int t = sizeBst(tree->left);  // Contar nós da subárvore esquerda
+
     if (t > k) {
         tree->left = insertRootPartitionBst(tree->left, key, k);
         tree = rotate_right(tree);
     }
-    
     else if (t < k) {
-        tree->right = insertRootPartitionBst(tree->right, key, k-t-1);
+        tree->right = insertRootPartitionBst(tree->right, key, k - t - 1);
         tree = rotate_left(tree);
     }
-
+    
     return tree;
 }
+
 
 int searchBst(Bst *tree, int key) { 
     if (!tree) { printf("Error, there's no tree in SearchBst!"); return -1;}
@@ -101,9 +101,13 @@ void destroyBst(Bst *tree) {
 static int max(int a, int b) { return a>b ? a:b; }
  
 int hightBst(Bst *tree) {
-    if (!tree) return -1;
-    if (!tree->left && !tree->right) return 0;
+    if (!tree || (!tree->left && !tree->right)) return 0;
     return 1 + max(hightBst(tree->right), hightBst(tree->left));
+}
+
+int sizeBst(Bst *tree) {
+    if (!tree) return 0;
+    return 1 + sizeBst(tree->left) + sizeBst(tree->right);
 }
 
 void printBstContent(Bst *tree) {
