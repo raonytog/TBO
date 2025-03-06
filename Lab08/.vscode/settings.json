@@ -1,5 +1,6 @@
 {
     "files.associations": {
-        "default_bst.h": "c"
+        "default_bst.h": "c",
+        "stdio.h": "c"
     }
 }

@@ -1,11 +1,11 @@
 all:
 	@ clear
-	@ gcc *.c -o bin/prog
+	@ gcc *.c -o prog
 	@ echo ------------
 	@ echo Compiling...
 	@ echo ------------
 	@ echo Executing...
-	@ bin/prog
+	@ ./prog 1000000
 	@ echo ------------
 	@ echo Finished!
 	@ echo ------------
