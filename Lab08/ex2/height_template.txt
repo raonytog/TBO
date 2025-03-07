@@ -9,4 +9,4 @@ ITER    H_BALANCED     H_NOT_BALANCED
 7       19              50
 8       19              51
 9       19              49
-AVG     19
+AVG     19              50.7

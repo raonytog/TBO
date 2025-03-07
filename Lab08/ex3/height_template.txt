@@ -9,4 +9,4 @@ ITER    HEIGHT_SORTED   HEIGHT_RANDOM
 7       48              47
 8       52              49
 9       50              49
-AVG     
+AVG     49.8            49.7
